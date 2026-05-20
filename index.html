@@ -682,10 +682,10 @@
 
   <script>
     const PRODUCT_DATASET = [
-      { id: 1, title: "Cologne Vendor", description: "The supreme fragrance supplier connection line details. Instant unlock option.", price: 10100, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_08_28_PM.webp?v=1775089729&width=600" },
-      { id: 2, title: "Hoodie vendor", description: "Premium quality blank hoodies and heavy cotton manufacturer links.", price: 10100, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_07_47_PM.webp?v=1775089782&width=600" },
-      { id: 3, title: "Moissanite vendor", description: "VVS passes tester diamond jewelry luxury manufacturers line verified.", price: 10100, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_09_09_PM.webp?v=1775089824&width=600" },
-      { id: 4, title: "Shoe vendor", description: "Highly trusted sneaker drop shipping links with packaging.", price: 10100, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_06_55_PM.webp?v=1775089808&width=600" }
+      { id: 1, title: "Cologne Vendor", description: "The supreme fragrance supplier connection line details. Instant unlock option.", price: 20, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_08_28_PM.webp?v=1775089729&width=600" },
+      { id: 2, title: "Hoodie vendor", description: "Premium quality blank hoodies and heavy cotton manufacturer links.", price: 30, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_07_47_PM.webp?v=1775089782&width=600" },
+      { id: 3, title: "Moissanite vendor", description: "VVS passes tester diamond jewelry luxury manufacturers line verified.", price: 25, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_09_09_PM.webp?v=1775089824&width=600" },
+      { id: 4, title: "Shoe vendor", description: "Highly trusted sneaker drop shipping links with packaging.", price: 30, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_06_55_PM.webp?v=1775089808&width=600" }
     ];
 
     const WHATSAPP_TARGET_NUMBER = "16415695059";
@@ -704,7 +704,7 @@
           <div class="ai-product-card__content">
             <h3 class="ai-product-card__title">${product.title}</h3>
             <p class="ai-product-card__description">${product.description}</p>
-            <div class="ai-product-card__price">₦${product.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>
+            <div class="ai-product-card__price">$${product.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>
             <button class="ai-product-card__button" onclick="openProductDrawer(${product.id})">View product</button>
           </div>
         </div>
@@ -750,7 +750,7 @@
           <div class="drawer-product-details">
             <h4 style="font-size: 16px; margin-bottom: 4px;">${product.title}</h4>
             <div style="font-weight: 700; color: #fff; font-size: 15px;" id="drawer-realtime-price">
-              ₦${(product.price * activeQuantitySelection).toLocaleString('en-US', {minimumFractionDigits: 2})}
+              $${(product.price * activeQuantitySelection).toLocaleString('en-US', {minimumFractionDigits: 2})}
             </div>
           </div>
         </div>
@@ -802,7 +802,7 @@
       activeQuantitySelection = Math.max(1, activeQuantitySelection + deltaValue);
       document.getElementById("drawer-qty-display").innerText = activeQuantitySelection;
       document.getElementById("drawer-realtime-price").innerText = 
-        `₦${(product.price * activeQuantitySelection).toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+        `$${(product.price * activeQuantitySelection).toLocaleString('en-US', {minimumFractionDigits: 2})}`;
     }
 
     // Process Cart Step Conversion System
@@ -817,7 +817,7 @@
 
       const totalCostCalculation = (product.price * activeQuantitySelection).toLocaleString('en-US', {minimumFractionDigits: 2});
       const generatedMessageText = encodeURIComponent(
-        `Hello The Supply Center! 👋\n\nI want to place an order for:\n📦 Product: *${product.title}*\n🔢 Quantity: *${activeQuantitySelection}*\n💰 Total Amount: *₦${totalCostCalculation}*\n\nPlease provide me with direct payment verification details.`
+        `Hello The Supply Center! 👋\n\nI want to place an order for:\n📦 Product: *${product.title}*\n🔢 Quantity: *${activeQuantitySelection}*\n💰 Total Amount: *$${totalCostCalculation}*\n\nPlease provide me with direct payment verification details.`
       );
       
       const targetWhatsAppDeepLink = `https://wa.me/${WHATSAPP_TARGET_NUMBER}?text=${generatedMessageText}`;
@@ -834,4 +834,7 @@
     }
   </script>
 </body>
+</html>
+dy>
+</html>
 </html>
