@@ -34,7 +34,7 @@
       color: var(--color-text);
       font-family: var(--font-family);
       overflow-x: hidden;
-      padding-top: 104px; /* Essential device spacing safety clear padding */
+      padding-top: 104px;
     }
 
     /* Top Promos Navigation Header Panel */
@@ -185,18 +185,16 @@
       justify-content: center;
       text-decoration: none;
     }
-
-    /* UPDATED GOTHIC STYLE LOGO TEXT */
     .header-minimal__logo-text {
-      color: #8c2bff; /* Distinct glowing purple from Hm Vends style */
-      font-family: 'UnifrakturMaguntia', cursive; /* Gothic Old English style */
+      color: #8c2bff;
+      font-family: 'UnifrakturMaguntia', cursive;
       font-size: 24px;
       font-weight: 700;
       white-space: nowrap;
       filter: drop-shadow(0 0 5px rgba(140, 43, 255, 0.6));
     }
 
-    /* Core Marketplace Native Grid Display Options */
+    /* Core Marketplace Grid */
     .ai-product-grid {
       width: 100%;
       padding: 64px 20px 32px;
@@ -219,8 +217,6 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
     }
-
-    /* Dynamic Standardized Catalog Cards */
     .ai-product-card {
       background-color: var(--color-surface);
       border: 1px solid var(--color-border);
@@ -495,6 +491,46 @@
       font-weight: 700;
     }
 
+    /* Cart Item List Styles */
+    .cart-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      align-items: center;
+    }
+    .cart-item-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #1a1a1a;
+    }
+    .cart-item-details {
+      flex-grow: 1;
+    }
+    .cart-item-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .cart-item-price {
+      font-size: 14px;
+      color: #fff;
+      font-weight: 700;
+    }
+    .cart-total-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0;
+      padding-top: 16px;
+      border-top: 1px solid var(--color-border);
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+
     /* Core System Interaction CTA Buttons */
     .action-btn {
       width: 100%;
@@ -510,8 +546,17 @@
       gap: 10px;
       transition: all 0.2s ease;
     }
+    .action-row {
+      display: flex;
+      gap: 12px;
+    }
     .action-btn--add {
       background-color: var(--color-accent);
+      color: white;
+    }
+    .action-btn--secondary {
+      background-color: transparent;
+      border: 1px solid var(--color-border);
       color: white;
     }
     .action-btn--whatsapp {
@@ -591,7 +636,7 @@
 
   <header class="header-minimal">
     <div class="header-minimal__pill">
-      <div class="header-minimal__icon" onclick="toggleCartDrawer(true)">
+      <div class="header-minimal__icon" onclick="openCartView()">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
           <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -689,9 +734,13 @@
     ];
 
     const WHATSAPP_TARGET_NUMBER = "16415695059";
+    
+    // Cart Global State
+    let cart = [];
+    let itemsInCartTotalCount = 0;
+    
     let activeDrawerProductId = null;
     let activeQuantitySelection = 1;
-    let itemsInCartTotalCount = 0;
 
     // Build Catalog Layout Interface View on Load
     document.addEventListener("DOMContentLoaded", () => {
@@ -730,7 +779,7 @@
       }
     });
 
-    // Opening Operations Drawer Module Setup
+    // Opens specific product details in drawer
     function openProductDrawer(productId) {
       const product = PRODUCT_DATASET.find(p => p.id === productId);
       if (!product) return;
@@ -741,7 +790,7 @@
       const drawerContainer = document.getElementById("drawer-container-body");
       drawerContainer.innerHTML = `
         <div class="drawer-header">
-          <h3 style="font-size: 18px; font-weight:700;">Product Checkout Configuration</h3>
+          <h3 style="font-size: 18px; font-weight:700;">Product Configuration</h3>
           <button class="drawer-close" onclick="toggleCartDrawer(false)">✕</button>
         </div>
 
@@ -778,6 +827,130 @@
       toggleCartDrawer(true);
     }
 
+    function adjustQuantity(deltaValue) {
+      const product = PRODUCT_DATASET.find(p => p.id === activeDrawerProductId);
+      if (!product) return;
+
+      activeQuantitySelection = Math.max(1, activeQuantitySelection + deltaValue);
+      document.getElementById("drawer-qty-display").innerText = activeQuantitySelection;
+      document.getElementById("drawer-realtime-price").innerText = 
+        `$${(product.price * activeQuantitySelection).toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+    }
+
+    // Process Adding Item to Global Cart
+    function executeCartAddition() {
+      const product = PRODUCT_DATASET.find(p => p.id === activeDrawerProductId);
+      if (!product) return;
+
+      // Update Array
+      const existingCartItemIndex = cart.findIndex(item => item.product.id === product.id);
+      if (existingCartItemIndex > -1) {
+        cart[existingCartItemIndex].quantity += activeQuantitySelection;
+      } else {
+        cart.push({ product: product, quantity: activeQuantitySelection });
+      }
+
+      // Update Global Counter
+      itemsInCartTotalCount += activeQuantitySelection;
+      const counterElement = document.getElementById("global-cart-counter");
+      counterElement.innerText = itemsInCartTotalCount;
+      counterElement.style.display = "flex";
+
+      // Change Buttons to Options
+      const placementZone = document.getElementById("drawer-action-placement-zone");
+      placementZone.innerHTML = `
+        <div class="action-row">
+          <button class="action-btn action-btn--secondary" onclick="toggleCartDrawer(false)">Continue Shopping</button>
+          <button class="action-btn action-btn--add" onclick="openCartView()">Go to Cart</button>
+        </div>
+      `;
+    }
+
+    // Open Cart Summary Drawer (All Items)
+    function openCartView() {
+      const drawerContainer = document.getElementById("drawer-container-body");
+
+      if (cart.length === 0) {
+        drawerContainer.innerHTML = `
+          <div class="drawer-header">
+            <h3 style="font-size: 18px; font-weight:700;">Your Cart</h3>
+            <button class="drawer-close" onclick="toggleCartDrawer(false)">✕</button>
+          </div>
+          <p style="text-align:center; padding: 30px; color: var(--color-text-muted);">Your cart is currently empty.</p>
+        `;
+        toggleCartDrawer(true);
+        return;
+      }
+
+      let cartItemsHTML = "";
+      let grandTotal = 0;
+
+      cart.forEach(item => {
+        const itemTotal = item.product.price * item.quantity;
+        grandTotal += itemTotal;
+        cartItemsHTML += `
+          <div class="cart-item">
+            <img src="${item.product.image}" class="cart-item-img" alt="${item.product.title}">
+            <div class="cart-item-details">
+              <div class="cart-item-title">${item.product.title}</div>
+              <div style="font-size: 12px; color: var(--color-text-muted);">Qty: ${item.quantity} &nbsp;&nbsp;|&nbsp;&nbsp; $${item.product.price}/ea</div>
+            </div>
+            <div class="cart-item-price">$${itemTotal.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>
+          </div>
+        `;
+      });
+
+      drawerContainer.innerHTML = `
+        <div class="drawer-header">
+          <h3 style="font-size: 18px; font-weight:700;">Your Cart</h3>
+          <button class="drawer-close" onclick="toggleCartDrawer(false)">✕</button>
+        </div>
+
+        <div style="max-height: 45vh; overflow-y: auto; padding-right: 5px;">
+          ${cartItemsHTML}
+        </div>
+
+        <div class="cart-total-section">
+          <span>Total:</span>
+          <span>$${grandTotal.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+        </div>
+
+        <div id="cart-action-zone">
+          <button class="action-btn action-btn--add" onclick="proceedToCheckout()">Proceed to Checkout</button>
+        </div>
+      `;
+      
+      toggleCartDrawer(true);
+    }
+
+    // Final Checkout Transition
+    function proceedToCheckout() {
+      let orderDetails = "Hello The Supply Center! 👋\n\nI want to place an order for the following items:\n\n";
+      let grandTotal = 0;
+
+      cart.forEach(item => {
+        const itemTotal = item.product.price * item.quantity;
+        grandTotal += itemTotal;
+        orderDetails += `📦 Product: *${item.product.title}*\n🔢 Quantity: *${item.quantity}*\n💵 Subtotal: *$${itemTotal.toLocaleString('en-US', {minimumFractionDigits: 2})}*\n\n`;
+      });
+
+      orderDetails += `💰 *Grand Total: $${grandTotal.toLocaleString('en-US', {minimumFractionDigits: 2})}*\n\nPlease provide me with direct payment verification details.`;
+
+      const encodedMessage = encodeURIComponent(orderDetails);
+      const targetWhatsAppDeepLink = `https://wa.me/${WHATSAPP_TARGET_NUMBER}?text=${encodedMessage}`;
+
+      const actionZone = document.getElementById("cart-action-zone");
+      actionZone.innerHTML = `
+        <a href="${targetWhatsAppDeepLink}" target="_blank" class="action-btn action-btn--whatsapp">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.948 0c3.179.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.239 3.48 8.421-.003 6.59-5.339 11.937-11.89 11.937-2.007 0-3.974-.511-5.73-1.482L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.747 1.451 5.436 0 9.86-4.413 9.863-9.847.001-2.63-1.03-5.101-2.903-6.974-1.873-1.873-4.347-2.903-6.977-2.904-5.441 0-9.866 4.414-9.869 9.85-.001 1.65.453 3.256 1.314 4.694l-.993 3.628 3.719-.972zm11.45-6.793c-.296-.149-1.755-.867-2.027-.966-.272-.099-.47-.149-.667.149-.198.297-.766.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.174.2-.298.298-.497.099-.198.05-.371-.025-.521-.075-.149-.667-1.609-.914-2.203-.241-.578-.485-.5-.667-.509l-.57-.01c-.198 0-.52.074-.791.371-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.755-.717 2.002-1.412.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z"/>
+          </svg>
+          Chat Vendor on WhatsApp
+        </a>
+      `;
+    }
+
+    // Modal Display Logic
     function toggleCartDrawer(showState) {
       const overlay = document.getElementById("interactive-checkout-drawer");
       if (showState) {
@@ -794,47 +967,6 @@
         toggleCartDrawer(false);
       }
     }
-
-    function adjustQuantity(deltaValue) {
-      const product = PRODUCT_DATASET.find(p => p.id === activeDrawerProductId);
-      if (!product) return;
-
-      activeQuantitySelection = Math.max(1, activeQuantitySelection + deltaValue);
-      document.getElementById("drawer-qty-display").innerText = activeQuantitySelection;
-      document.getElementById("drawer-realtime-price").innerText = 
-        `$${(product.price * activeQuantitySelection).toLocaleString('en-US', {minimumFractionDigits: 2})}`;
-    }
-
-    // Process Cart Step Conversion System
-    function executeCartAddition() {
-      const product = PRODUCT_DATASET.find(p => p.id === activeDrawerProductId);
-      if (!product) return;
-
-      itemsInCartTotalCount += activeQuantitySelection;
-      const counterElement = document.getElementById("global-cart-counter");
-      counterElement.innerText = itemsInCartTotalCount;
-      counterElement.style.display = "flex";
-
-      const totalCostCalculation = (product.price * activeQuantitySelection).toLocaleString('en-US', {minimumFractionDigits: 2});
-      const generatedMessageText = encodeURIComponent(
-        `Hello The Supply Center! 👋\n\nI want to place an order for:\n📦 Product: *${product.title}*\n🔢 Quantity: *${activeQuantitySelection}*\n💰 Total Amount: *$${totalCostCalculation}*\n\nPlease provide me with direct payment verification details.`
-      );
-      
-      const targetWhatsAppDeepLink = `https://wa.me/${WHATSAPP_TARGET_NUMBER}?text=${generatedMessageText}`;
-
-      const placementZone = document.getElementById("drawer-action-placement-zone");
-      placementZone.innerHTML = `
-        <a href="${targetWhatsAppDeepLink}" target="_blank" class="action-btn action-btn--whatsapp">
-          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.948 0c3.179.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.239 3.48 8.421-.003 6.59-5.339 11.937-11.89 11.937-2.007 0-3.974-.511-5.73-1.482L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.747 1.451 5.436 0 9.86-4.413 9.863-9.847.001-2.63-1.03-5.101-2.903-6.974-1.873-1.873-4.347-2.903-6.977-2.904-5.441 0-9.866 4.414-9.869 9.85-.001 1.65.453 3.256 1.314 4.694l-.993 3.628 3.719-.972zm11.45-6.793c-.296-.149-1.755-.867-2.027-.966-.272-.099-.47-.149-.667.149-.198.297-.766.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.174.2-.298.298-.497.099-.198.05-.371-.025-.521-.075-.149-.667-1.609-.914-2.203-.241-.578-.485-.5-.667-.509l-.57-.01c-.198 0-.52.074-.791.371-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.755-.717 2.002-1.412.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z"/>
-          </svg>
-          Chat Vendor on WhatsApp
-        </a>
-      `;
-    }
   </script>
 </body>
-</html>
-dy>
-</html>
 </html>
