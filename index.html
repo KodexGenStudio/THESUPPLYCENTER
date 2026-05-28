@@ -561,92 +561,6 @@
       text-decoration: none;
     }
 
-    /* Dedicated External Links Page Styles */
-    .vendor-page {
-      display: none; /* Hidden by default */
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 20px 80px;
-      min-height: 100vh;
-    }
-    .vendor-page__header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 32px;
-      border-bottom: 1px solid var(--color-border);
-      padding-bottom: 20px;
-    }
-    .back-btn {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      color: var(--color-text);
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .back-btn:hover {
-      background: var(--color-surface-hover);
-    }
-    .vendor-page__title {
-      font-size: 24px;
-      font-weight: 700;
-      color: #fff;
-    }
-    .vendor-link-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .vendor-link-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: 16px;
-      padding: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-    .vendor-link-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--color-accent);
-    }
-    .vendor-link-card__info {
-      flex: 1;
-      padding-right: 20px;
-    }
-    .vendor-link-card__title {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: #fff;
-    }
-    .vendor-link-card__desc {
-      font-size: 14px;
-      color: var(--color-text-muted);
-      line-height: 1.5;
-    }
-    .vendor-link-card__btn {
-      background: var(--color-accent);
-      color: #fff;
-      text-decoration: none;
-      padding: 12px 24px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 14px;
-      white-space: nowrap;
-      transition: background 0.2s ease;
-    }
-    .vendor-link-card__btn:hover {
-      background: var(--color-accent-hover);
-    }
-
     @media (max-width: 989px) {
       .ai-product-grid__grid {
         grid-template-columns: repeat(2, 1fr);
@@ -670,18 +584,6 @@
       }
       .payment-grid {
         grid-template-columns: 1fr;
-      }
-      .vendor-link-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-      }
-      .vendor-link-card__btn {
-        width: 100%;
-        text-align: center;
-      }
-      .vendor-link-card__info {
-        padding-right: 0;
       }
     }
   </style>
@@ -733,7 +635,7 @@
         </svg>
         <span class="header-minimal__cart-count" id="global-cart-counter">0</span>
       </div>
-      <a href="#" class="header-minimal__logo" onclick="closeChinaVendorView(event)">
+      <a href="#" class="header-minimal__logo">
         <span class="header-minimal__logo-text">The Supply Center</span>
       </a>
       <button class="header-minimal__icon" style="background:transparent; border:none;">
@@ -776,51 +678,6 @@
     </section>
   </div>
 
-  <div id="china-vendor-view" class="vendor-page">
-    <div class="vendor-page__header">
-      <button class="back-btn" onclick="closeChinaVendorView(event)" aria-label="Go Back">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M19 12H5M12 19l-7-7 7-7"/>
-        </svg>
-      </button>
-      <h2 class="vendor-page__title">Exclusive Overseas Supply Links</h2>
-    </div>
-
-    <div class="vendor-link-list">
-      <div class="vendor-link-card">
-        <div class="vendor-link-card__info">
-          <h3 class="vendor-link-card__title">Kakobuy Factory Direct — Apparel</h3>
-          <p class="vendor-link-card__desc">Premium quality factory direct connections specializing in top-tier apparel, garments, and high-demand blanks straight from the source.</p>
-        </div>
-        <a href="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7775450038&affcode=ZISW0PUI3" target="_blank" class="vendor-link-card__btn">Visit Platform 1</a>
-      </div>
-
-      <div class="vendor-link-card">
-        <div class="vendor-link-card__info">
-          <h3 class="vendor-link-card__title">Kakobuy Exclusive — Premium Goods</h3>
-          <p class="vendor-link-card__desc">Verified bulk supplier for high-end retail goods and luxury accessories. Benefit from wholesale pricing and strict quality control.</p>
-        </div>
-        <a href="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7776567234&affcode=ZISW0PUI3" target="_blank" class="vendor-link-card__btn">Visit Platform 2</a>
-      </div>
-
-      <div class="vendor-link-card">
-        <div class="vendor-link-card__info">
-          <h3 class="vendor-link-card__title">Kakobuy Supplier — Footwear & Details</h3>
-          <p class="vendor-link-card__desc">Direct access to trusted footwear production lines and high-quality detailed hardware with reliable international shipping.</p>
-        </div>
-        <a href="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7773626477&affcode=ZISW0PUI3" target="_blank" class="vendor-link-card__btn">Visit Platform 3</a>
-      </div>
-
-      <div class="vendor-link-card">
-        <div class="vendor-link-card__info">
-          <h3 class="vendor-link-card__title">Kakobuy Main Hub — General Merch</h3>
-          <p class="vendor-link-card__desc">Highly rated general merchandise hub. A vetted supplier offering consistently high-margin dropshipping and wholesale products.</p>
-        </div>
-        <a href="https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7773699603&affcode=ZISW0PUI3" target="_blank" class="vendor-link-card__btn">Visit Platform 4</a>
-      </div>
-    </div>
-  </div>
-
   <div class="drawer-overlay" id="interactive-checkout-drawer" onclick="handleOutsideClick(event)">
     <div class="drawer-container" id="drawer-container-body"></div>
   </div>
@@ -831,8 +688,12 @@
       { id: 2, title: "Hoodie vendor", description: "Premium quality blank hoodies and heavy cotton manufacturer links.", price: 30, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_07_47_PM.webp?v=1775089782&width=600" },
       { id: 3, title: "Moissanite vendor", description: "VVS passes tester diamond jewelry luxury manufacturers line verified.", price: 25, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_09_09_PM.webp?v=1775089824&width=600" },
       { id: 4, title: "Shoe vendor", description: "Highly trusted sneaker drop shipping links with packaging.", price: 30, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_06_55_PM.webp?v=1775089808&width=600" },
-      // Updated China Vendor with logistics/shipping container design image
-      { id: 5, title: "China Vendor", description: "Access direct overseas manufacturing platforms and wholesale vendor links.", price: 0, image: "https://images.unsplash.com/photo-1586528116311-ad8ed7c66364?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", isChinaVendor: true }
+      
+      // Separated China Vendors
+      { id: 5, title: "China Apparel Vendor", description: "Premium quality factory direct connections specializing in top-tier apparel, garments, and high-demand blanks.", price: 20, image: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+      { id: 6, title: "China Bag Vendor", description: "Verified bulk supplier for high-end retail goods and luxury accessories. strict quality control included.", price: 20, image: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+      { id: 7, title: "China Footwear Vendor", description: "Direct access to trusted footwear production lines and high-quality detailed hardware with reliable shipping.", price: 20, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+      { id: 8, title: "China General Merch Vendor", description: "Highly rated general merchandise hub. A vetted supplier offering consistently high-margin wholesale products.", price: 20, image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" }
     ];
 
     // Payment Methods Configuration
@@ -871,7 +732,7 @@
           <div class="ai-product-card__content">
             <h3 class="ai-product-card__title">${product.title}</h3>
             <p class="ai-product-card__description">${product.description}</p>
-            <div class="ai-product-card__price">${product.isChinaVendor ? 'External Links' : '$' + product.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>
+            <div class="ai-product-card__price">$${product.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>
             <button class="ai-product-card__button" onclick="openProductDrawer(${product.id})">View product</button>
           </div>
         </div>
@@ -897,31 +758,10 @@
       }
     });
 
-    // Handle Page Switching
-    function openChinaVendorView() {
-      document.getElementById('home-view').style.display = 'none';
-      document.getElementById('china-vendor-view').style.display = 'block';
-      window.scrollTo(0, 0);
-    }
-
-    function closeChinaVendorView(event) {
-      if(event) event.preventDefault();
-      document.getElementById('china-vendor-view').style.display = 'none';
-      document.getElementById('home-view').style.display = 'block';
-      window.scrollTo(0, 0);
-    }
-
     function openProductDrawer(productId) {
       const product = PRODUCT_DATASET.find(p => p.id === productId);
       if (!product) return;
 
-      // Custom Handler for China Vendor opens the new page, NOT the drawer
-      if (product.isChinaVendor) {
-        openChinaVendorView();
-        return;
-      }
-
-      // Standard Product Configuration Display
       activeDrawerProductId = productId;
       activeQuantitySelection = 1;
       const drawerContainer = document.getElementById("drawer-container-body");
