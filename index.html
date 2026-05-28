@@ -299,16 +299,121 @@
     .ai-product-card__button--external:hover {
       background-color: #3a3a3a;
     }
-    /* Unified Native Reviews Component Styles */
-    .system-reviews-section {
-      padding: 40px 20px;
+
+    /* Reviews Section - Modern Feed */
+    .customer-reviews-section {
+      padding: 40px 20px 60px;
       background-color: #050505;
-      border-top: 1px solid rgba(255,255,255,0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
     .reviews-container {
       max-width: 1400px;
       margin: 0 auto;
     }
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 28px;
+      text-align: center;
+      letter-spacing: -0.3px;
+    }
+    .reviews-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .review-card {
+      background: rgba(20, 20, 20, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      padding: 18px 22px;
+      transition: all 0.2s;
+    }
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .reviewer-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .reviewer-name {
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .review-date {
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+    .stars {
+      color: #ffb703;
+      font-size: 15px;
+      letter-spacing: 2px;
+    }
+    .verified-badge {
+      background: rgba(37, 211, 102, 0.12);
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      border-radius: 40px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #25d366;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .review-text {
+      color: #e5e5e5;
+      font-size: 14px;
+      line-height: 1.45;
+      margin: 12px 0 16px;
+    }
+    .review-footer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 16px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 14px;
+      margin-top: 6px;
+    }
+    .like-review-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: none;
+      color: #aaa;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      padding: 6px 12px;
+      border-radius: 30px;
+    }
+    .like-review-btn:hover {
+      background: rgba(127, 40, 255, 0.1);
+      color: #b77cff;
+    }
+    .like-review-btn.liked {
+      color: var(--color-accent);
+    }
+    .like-icon {
+      font-size: 16px;
+    }
+    .like-count {
+      font-weight: 600;
+    }
+
+    /* Rating summary block (retained from before) */
     .reviews-dashboard {
       background: rgba(20, 20, 20, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -318,7 +423,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      margin-bottom: 32px;
+      margin-bottom: 48px;
       backdrop-filter: blur(10px);
       flex-wrap: wrap;
     }
@@ -361,7 +466,7 @@
       background: rgba(127, 40, 255, 0.2);
     }
 
-    /* Slide Up Mobile Drawer Overlay Modals */
+    /* Drawer, Cart, Payment styles same as before */
     .drawer-overlay {
       position: fixed;
       top: 0;
@@ -429,11 +534,6 @@
       background: #1a1a1a;
       border: 1px solid var(--color-border);
     }
-    .drawer-product-details {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
     .drawer-qty-selector {
       display: flex;
       align-items: center;
@@ -459,8 +559,6 @@
       font-size: 16px;
       font-weight: 700;
     }
-
-    /* Cart & Payment Method Styles (only for non-China items) */
     .cart-item {
       display: flex;
       gap: 12px;
@@ -472,7 +570,6 @@
       height: 60px;
       border-radius: 8px;
       object-fit: cover;
-      background: #1a1a1a;
     }
     .cart-item-details {
       flex-grow: 1;
@@ -480,27 +577,16 @@
     .cart-item-title {
       font-size: 14px;
       font-weight: 600;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-    .cart-item-price {
-      font-size: 14px;
-      color: #fff;
-      font-weight: 700;
     }
     .cart-total-section {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       margin: 20px 0;
       padding-top: 16px;
       border-top: 1px solid var(--color-border);
       font-size: 18px;
       font-weight: 700;
-      color: #fff;
     }
-
-    /* Payment Method Grid Grid */
     .payment-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -526,15 +612,6 @@
       border-color: var(--color-accent);
       background: rgba(127, 40, 255, 0.05);
     }
-    .payment-icon-wrapper {
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
     .action-btn {
       width: 100%;
       padding: 16px;
@@ -548,10 +625,6 @@
       justify-content: center;
       gap: 10px;
       transition: all 0.2s ease;
-    }
-    .action-row {
-      display: flex;
-      gap: 12px;
     }
     .action-btn--add {
       background-color: var(--color-accent);
@@ -567,397 +640,277 @@
       color: white;
       text-decoration: none;
     }
-
+    .action-row {
+      display: flex;
+      gap: 12px;
+    }
     @media (max-width: 989px) {
-      .ai-product-grid__grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-      }
+      .ai-product-grid__grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 767px) {
-      body {
-        padding-top: 90px;
-      }
+      body { padding-top: 90px; }
       .header-minimal { top: 84px; }
-      .ai-product-grid__grid {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 16px;
-      }
-      .ai-product-grid {
-        padding-top: 64px;
-      }
-      .drawer-container {
-        padding: 20px;
-      }
-      .payment-grid {
-        grid-template-columns: 1fr;
-      }
+      .ai-product-grid__grid { grid-template-columns: 1fr; }
+      .payment-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <div class="promo-bar">
-    <div class="promo-bar__inner">
-      <span class="promo-bar__pill">24 HOUR DROP</span>
-      <span class="promo-bar__text">Save an extra <strong>20%</strong> on any order — <strong>today only!</strong></span>
-    </div>
+<div class="promo-bar">
+  <div class="promo-bar__inner">
+    <span class="promo-bar__pill">24 HOUR DROP</span>
+    <span class="promo-bar__text">Save an extra <strong>20%</strong> on any order — <strong>today only!</strong></span>
   </div>
+</div>
 
-  <div class="scaled-trust-bar">
-    <div class="trust-bar__track">
-      <div class="trust-bar__item"><span>5,000+ Happy Customers</span></div>
-      <span class="trust-bar__separator"></span>
-      <div class="trust-bar__item"><span>#1 Trusted Store</span></div>
-      <span class="trust-bar__separator"></span>
-      <div class="trust-bar__item"><span>⭐ 4.5/5 Rated Hub</span></div>
-      <span class="trust-bar__separator"></span>
-      <div class="trust-bar__item"><span>Verified Wholesale Network</span></div>
-    </div>
+<div class="scaled-trust-bar">
+  <div class="trust-bar__track">
+    <div class="trust-bar__item"><span>5,000+ Happy Customers</span></div>
+    <span class="trust-bar__separator"></span>
+    <div class="trust-bar__item"><span>#1 Trusted Store</span></div>
+    <span class="trust-bar__separator"></span>
+    <div class="trust-bar__item"><span>⭐ 4.5/5 Rated Hub</span></div>
+    <span class="trust-bar__separator"></span>
+    <div class="trust-bar__item"><span>Verified Wholesale Network</span></div>
   </div>
+</div>
 
-  <header class="header-minimal">
-    <div class="header-minimal__pill">
-      <div class="header-minimal__icon" onclick="openCartView()">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-        </svg>
-        <span class="header-minimal__cart-count" id="global-cart-counter">0</span>
-      </div>
-      <a href="#" class="header-minimal__logo">
-        <span class="header-minimal__logo-text">The Supply Center</span>
-      </a>
-      <button class="header-minimal__icon" style="background:transparent; border:none;">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M3 12h18M3 6h18M3 18h18"></path>
-        </svg>
-      </button>
+<header class="header-minimal">
+  <div class="header-minimal__pill">
+    <div class="header-minimal__icon" onclick="openCartView()">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      <span class="header-minimal__cart-count" id="global-cart-counter">0</span>
     </div>
-  </header>
+    <a href="#" class="header-minimal__logo"><span class="header-minimal__logo-text">The Supply Center</span></a>
+    <button class="header-minimal__icon" style="background:transparent; border:none;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"></path></svg></button>
+  </div>
+</header>
 
-  <div id="home-view">
-    <main class="ai-product-grid">
-      <div class="ai-product-grid__container">
-        <h2 class="ai-product-grid__heading">Featured Vendors</h2>
-        <div class="ai-product-grid__grid" id="products-catalog-wrapper"></div>
-      </div>
-    </main>
+<div id="home-view">
+  <main class="ai-product-grid">
+    <div class="ai-product-grid__container">
+      <h2 class="ai-product-grid__heading">Featured Vendors</h2>
+      <div class="ai-product-grid__grid" id="products-catalog-wrapper"></div>
+    </div>
+  </main>
 
-    <section class="system-reviews-section">
-      <div class="reviews-container">
-        <div class="reviews-dashboard">
-          <div class="metric-box">
-            <div class="big-rating">4.5</div>
-            <div>
-              <div class="stars-display">★★★★★</div>
-              <div class="metric-text">Based on <span id="reviewCountDisplay">30.7k</span> verified ratings</div>
-            </div>
+  <!-- Rating summary dashboard -->
+  <section class="system-reviews-section">
+    <div class="reviews-container">
+      <div class="reviews-dashboard">
+        <div class="metric-box">
+          <div class="big-rating">4.5</div>
+          <div>
+            <div class="stars-display">★★★★★</div>
+            <div class="metric-text">Based on <span id="reviewCountDisplay">30.7k</span> verified ratings</div>
           </div>
-          <div class="likes-badge" id="likeButton">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="#7f28ff" stroke="#7f28ff"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            <span><span id="likeCounter">30.5k</span> Likes</span>
-          </div>
+        </div>
+        <div class="likes-badge" id="likeButton">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#7f28ff" stroke="#7f28ff"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span><span id="likeCounter">30.5k</span> Likes</span>
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
-  <div class="drawer-overlay" id="interactive-checkout-drawer" onclick="handleOutsideClick(event)">
-    <div class="drawer-container" id="drawer-container-body"></div>
-  </div>
+  <!-- Customer Reviews Feed (new) -->
+  <section class="customer-reviews-section">
+    <div class="reviews-container">
+      <h3 class="section-title">Real customer reviews</h3>
+      <div class="reviews-feed" id="reviews-feed-container"></div>
+    </div>
+  </section>
+</div>
 
-  <script>
-    // ---------- PRODUCT DATA ----------
-    // First 4 products = premium non-China (retain internal cart & WhatsApp)
-    // Next 5 products = China vendors => redirect to kakobuy links, no payment/whatsapp, external badge removed
-    
-    const CHINA_REDIRECT_LINKS = [
-      "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7776567234&affcode=ZISW0PUI3",
-      "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7773626477&affcode=ZISW0PUI3",
-      "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7773699603&affcode=ZISW0PUI3",
-      "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7773624481&affcode=ZISW0PUI3",
-      "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7775450038&affcode=ZISW0PUI3"
-    ];
-    
-    // Updated product details: titles, descriptions, images
-    const chinaProductTitles = [
-      "China Shoe supplier",
-      "China Nki Slipper",
-      "China jersey supplier",
-      "China minimalistic baseball cap",
-      "China Casual Trendy Shoulder Bag"
-    ];
-    
-    const chinaDescriptions = [
-      "Verified factory-direct footwear supplier. Premium materials & competitive bulk pricing. Secure purchase via Kakobuy.",
-      "Ultra-comfortable Nki slides & slippers — perfect for wholesale or resale. Direct link to trusted vendor.",
-      "Pro-grade soccer & streetwear jerseys. High-quality stitching and breathable fabrics. External purchase secure.",
-      "Minimalist curve-brim caps, solid construction, versatile styles. Redirect to verified supplier for bulk orders.",
-      "Trendy everyday shoulder bag, casual chic design. Ideal for retail and dropshipping. Purchase via external link."
-    ];
-    
-    const chinaImages = [
-      "https://si.geilicdn.com/pcitem901858814557-48000000018f67fd121b0a20e35c_800_600.jpg?w=760&h=760",
-      "https://si.geilicdn.com/pcitem1932596551-5c330000019bb3de18690a81347d_1920_1920.jpg?w=760&h=760",
-      "https://si.geilicdn.com/open1685879877-252808396-11710000019435731f6f0a8115b5_1000_1000.jpg?w=760&h=760",
-      "https://si.geilicdn.com/pcitem901911512620-504800000194250734760a230115_1074_1074.jpg?w=760&h=760",
-      "https://si.geilicdn.com/pcitem901934833296-28ea0000019649cd439a0a20e284-unadjust_937_905.png?w=760&h=760"
-    ];
-    
-    const coreProducts = [
-      { id: 1, title: "Cologne Vendor", description: "The supreme fragrance supplier connection line details. Instant unlock option.", price: 20, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_08_28_PM.webp?v=1775089729&width=600", external: false },
-      { id: 2, title: "Hoodie vendor", description: "Premium quality blank hoodies and heavy cotton manufacturer links.", price: 30, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_07_47_PM.webp?v=1775089782&width=600", external: false },
-      { id: 3, title: "Moissanite vendor", description: "VVS passes tester diamond jewelry luxury manufacturers line verified.", price: 25, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_09_09_PM.webp?v=1775089824&width=600", external: false },
-      { id: 4, title: "Shoe vendor", description: "Highly trusted sneaker drop shipping links with packaging.", price: 30, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_06_55_PM.webp?v=1775089808&width=600", external: false }
-    ];
-    
-    const chinaProducts = [];
-    for (let i = 0; i < CHINA_REDIRECT_LINKS.length; i++) {
-      chinaProducts.push({
-        id: 5 + i,
-        title: chinaProductTitles[i],
-        description: chinaDescriptions[i],
-        price: null,   // not shown as regular price; external link product
-        image: chinaImages[i],
-        external: true,
-        externalLink: CHINA_REDIRECT_LINKS[i]
-      });
-    }
-    
-    const PRODUCT_DATASET = [...coreProducts, ...chinaProducts];
-    
-    // Payment methods + whatsapp only for internal (non-china) cart
-    const PAYMENT_METHODS = [
-      { name: "Cash App", color: "#00D632", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>` },
-      { name: "Zelle", color: "#741b88", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 17h16M7 7l10 10"/></svg>` },
-      { name: "Venmo", color: "#008CFF", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4l4 16 9-16"/></svg>` },
-      { name: "PayPal", color: "#003087", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4h8a5 5 0 0 1 5 5c0 3-2 5-5 5H9.5L8 20H4z"/></svg>` }
-    ];
-    const WHATSAPP_TARGET_NUMBER = "16415695059";
-    
-    let cart = [];        // only for !external products
-    let itemsInCartTotalCount = 0;
-    let activeDrawerProductId = null;
-    let activeQuantitySelection = 1;
-    
-    // Render catalog
-    function renderCatalog() {
-      const container = document.getElementById("products-catalog-wrapper");
-      container.innerHTML = PRODUCT_DATASET.map(product => {
-        const isExternal = product.external === true;
-        // For external products: no price badge, just an empty area for spacing. Remove any "External Vendor" text.
-        const priceHtml = isExternal 
-          ? `<div class="ai-product-card__price"><span style="opacity:0.6; font-size:12px;">🔗 external sourcing</span></div>`
-          : `<div class="ai-product-card__price">$${product.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>`;
-        const buttonClass = isExternal ? "ai-product-card__button ai-product-card__button--external" : "ai-product-card__button";
-        const buttonAction = isExternal 
-          ? `redirectToExternal('${product.externalLink}')` 
-          : `openProductDrawer(${product.id})`;
-        const buttonText = isExternal ? "Visit Kakobuy →" : "View product";
-        return `
-          <div class="ai-product-card">
-            <div class="ai-product-card__image-wrapper">
-              <img src="${product.image}" alt="${product.title}" class="ai-product-card__image" loading="lazy">
-            </div>
-            <div class="ai-product-card__content">
-              <h3 class="ai-product-card__title">${product.title}</h3>
-              <p class="ai-product-card__description">${product.description}</p>
-              ${priceHtml}
-              <button class="${buttonClass}" onclick="${buttonAction}">${buttonText}</button>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-    
-    // redirect for china products
-    window.redirectToExternal = function(url) {
-      window.open(url, '_blank');
-    };
-    
-    // Drawer and cart logic (only for internal ids)
-    function openProductDrawer(productId) {
-      const product = PRODUCT_DATASET.find(p => p.id === productId);
-      if (!product || product.external) return;
-      activeDrawerProductId = productId;
-      activeQuantitySelection = 1;
-      const drawerContainer = document.getElementById("drawer-container-body");
-      drawerContainer.innerHTML = `
-        <div class="drawer-header">
-          <h3 style="font-size: 18px; font-weight:700;">Configure Order</h3>
-          <button class="drawer-close" onclick="toggleCartDrawer(false)">✕</button>
-        </div>
-        <div class="drawer-product-preview">
-          <img src="${product.image}" class="drawer-product-img" alt="${product.title}">
-          <div class="drawer-product-details">
-            <h4 style="font-size: 16px; margin-bottom: 4px;">${product.title}</h4>
-            <div style="font-weight: 700; color: #fff; font-size: 15px;" id="drawer-realtime-price">
-              $${(product.price * activeQuantitySelection).toLocaleString('en-US', {minimumFractionDigits: 2})}
-            </div>
-          </div>
-        </div>
-        <div class="drawer-qty-selector">
-          <span style="font-size:14px; font-weight:500; color:var(--color-text-muted);">Select Quantity</span>
-          <div style="display:flex; align-items:center; gap:14px;">
-            <button class="qty-btn" onclick="adjustQuantity(-1)">−</button>
-            <span class="qty-val" id="drawer-qty-display">1</span>
-            <button class="qty-btn" onclick="adjustQuantity(1)">+</button>
-          </div>
-        </div>
-        <div id="drawer-action-placement-zone">
-          <button class="action-btn action-btn--add" onclick="executeCartAddition()">Add to Cart</button>
-        </div>
-      `;
-      toggleCartDrawer(true);
-    }
-    
-    window.adjustQuantity = function(delta) {
-      const product = PRODUCT_DATASET.find(p => p.id === activeDrawerProductId);
-      if (!product) return;
-      activeQuantitySelection = Math.max(1, activeQuantitySelection + delta);
-      document.getElementById("drawer-qty-display").innerText = activeQuantitySelection;
-      document.getElementById("drawer-realtime-price").innerText = 
-        `$${(product.price * activeQuantitySelection).toLocaleString('en-US', {minimumFractionDigits: 2})}`;
-    };
-    
-    window.executeCartAddition = function() {
-      const product = PRODUCT_DATASET.find(p => p.id === activeDrawerProductId);
-      if (!product || product.external) return;
-      const existingIndex = cart.findIndex(item => item.product.id === product.id);
-      if (existingIndex > -1) {
-        cart[existingIndex].quantity += activeQuantitySelection;
-      } else {
-        cart.push({ product: product, quantity: activeQuantitySelection });
-      }
-      itemsInCartTotalCount += activeQuantitySelection;
-      document.getElementById("global-cart-counter").innerText = itemsInCartTotalCount;
-      const zone = document.getElementById("drawer-action-placement-zone");
-      zone.innerHTML = `
-        <div class="action-row">
-          <button class="action-btn action-btn--secondary" onclick="toggleCartDrawer(false)">Continue Shopping</button>
-          <button class="action-btn action-btn--add" onclick="openCartView()">Go to Cart</button>
-        </div>
-      `;
-    };
-    
-    window.openCartView = function() {
-      const drawerContainer = document.getElementById("drawer-container-body");
-      if (cart.length === 0) {
-        drawerContainer.innerHTML = `
-          <div class="drawer-header">
-            <h3 style="font-size: 18px; font-weight:700;">Your Cart</h3>
-            <button class="drawer-close" onclick="toggleCartDrawer(false)">✕</button>
-          </div>
-          <p style="text-align:center; padding: 30px; color: var(--color-text-muted);">Your cart is empty.</p>
-        `;
-        toggleCartDrawer(true);
-        return;
-      }
-      let cartItemsHTML = "";
-      let grandTotal = 0;
-      cart.forEach(item => {
-        const itemTotal = item.product.price * item.quantity;
-        grandTotal += itemTotal;
-        cartItemsHTML += `
-          <div class="cart-item">
-            <img src="${item.product.image}" class="cart-item-img" alt="${item.product.title}">
-            <div class="cart-item-details">
-              <div class="cart-item-title">${item.product.title}</div>
-              <div style="font-size: 12px; color: var(--color-text-muted);">Qty: ${item.quantity} &nbsp;&nbsp;|&nbsp;&nbsp; $${item.product.price}/ea</div>
-            </div>
-            <div class="cart-item-price">$${itemTotal.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>
-          </div>
-        `;
-      });
-      drawerContainer.innerHTML = `
-        <div class="drawer-header">
-          <h3 style="font-size: 18px; font-weight:700;">Your Cart</h3>
-          <button class="drawer-close" onclick="toggleCartDrawer(false)">✕</button>
-        </div>
-        <div style="max-height: 40vh; overflow-y: auto; padding-right: 5px;">${cartItemsHTML}</div>
-        <div class="cart-total-section"><span>Total:</span><span>$${grandTotal.toLocaleString('en-US', {minimumFractionDigits: 2})}</span></div>
-        <div id="cart-action-zone"><button class="action-btn action-btn--add" onclick="showPaymentMethods()">Proceed to Checkout</button></div>
-      `;
-      toggleCartDrawer(true);
-    };
-    
-    window.showPaymentMethods = function() {
-      const drawerContainer = document.getElementById("drawer-container-body");
-      let paymentsHTML = PAYMENT_METHODS.map(method => `
-        <button class="payment-btn" onclick="finalizeOrder('${method.name}')">
-          <div class="payment-icon-wrapper" style="color: ${method.color}">${method.icon}</div>
-          <span>${method.name}</span>
-        </button>
-      `).join('');
-      drawerContainer.innerHTML = `
-        <div class="drawer-header">
-          <h3 style="font-size: 18px; font-weight:700;">Select Payment Method</h3>
-          <button class="drawer-close" onclick="toggleCartDrawer(false)">✕</button>
-        </div>
-        <p style="color: var(--color-text-muted); font-size: 14px; margin-bottom: 16px;">How would you like to pay?</p>
-        <div class="payment-grid">${paymentsHTML}</div>
-      `;
-    };
-    
-    window.finalizeOrder = function(selectedPaymentMethod) {
-      if (cart.length === 0) return;
-      let orderDetails = "Hello The Supply Center! 👋\n\nI want to place an order for the following items:\n\n";
-      let grandTotal = 0;
-      cart.forEach(item => {
-        const itemTotal = item.product.price * item.quantity;
-        grandTotal += itemTotal;
-        orderDetails += `📦 Product: *${item.product.title}*\n🔢 Quantity: *${item.quantity}*\n💵 Subtotal: *$${itemTotal.toLocaleString('en-US', {minimumFractionDigits: 2})}*\n\n`;
-      });
-      orderDetails += `💰 *Grand Total: $${grandTotal.toLocaleString('en-US', {minimumFractionDigits: 2})}*\n💳 *Payment Method: ${selectedPaymentMethod}*\n\nPlease provide me with direct payment verification details for ${selectedPaymentMethod}.`;
-      const encodedMessage = encodeURIComponent(orderDetails);
-      const targetWhatsAppDeepLink = `https://wa.me/${WHATSAPP_TARGET_NUMBER}?text=${encodedMessage}`;
-      const drawerContainer = document.getElementById("drawer-container-body");
-      drawerContainer.innerHTML = `
-        <div class="drawer-header">
-          <h3 style="font-size: 18px; font-weight:700;">Checkout Ready</h3>
-          <button class="drawer-close" onclick="toggleCartDrawer(false)">✕</button>
-        </div>
-        <div style="text-align: center; padding: 20px 0;">
-          <p style="margin-bottom: 8px; font-size: 16px;">You selected <strong>${selectedPaymentMethod}</strong></p>
-          <p style="color: var(--color-text-muted); font-size: 14px; margin-bottom: 24px;">Click the button below to secure your items directly via WhatsApp.</p>
-          <a href="${targetWhatsAppDeepLink}" target="_blank" class="action-btn action-btn--whatsapp">
-            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.948 0c3.179.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.239 3.48 8.421-.003 6.59-5.339 11.937-11.89 11.937-2.007 0-3.974-.511-5.73-1.482L0 24zM6.59 19.154c1.6.95 3.188 1.449 4.747 1.451 5.436 0 9.86-4.413 9.863-9.847.001-2.63-1.03-5.101-2.903-6.974-1.873-1.873-4.347-2.903-6.977-2.904-5.441 0-9.866 4.414-9.869 9.85 0 1.65.453 3.256 1.314 4.694l-.993 3.628 3.719-.972zM18.04 12.36c-.296-.149-1.755-.867-2.027-.966-.272-.099-.47-.149-.667.149s-.766.966-.94 1.164c-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.174.2-.298.298-.497.099-.198.05-.371-.025-.521-.075-.149-.667-1.609-.914-2.203-.241-.578-.485-.5-.667-.509l-.57-.01c-.198 0-.52.074-.791.371-.272.297-1.04 1.016-1.04 2.479s1.065 2.875 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.755-.717 2.002-1.412.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z"/></svg>
-            Chat Vendor on WhatsApp
-          </a>
-        </div>
-      `;
-    };
-    
-    window.toggleCartDrawer = function(show) {
-      const overlay = document.getElementById("interactive-checkout-drawer");
-      if (show) {
-        overlay.classList.add("active");
-        document.body.style.overflow = "hidden";
-      } else {
-        overlay.classList.remove("active");
-        document.body.style.overflow = "auto";
-      }
-    };
-    window.handleOutsideClick = function(event) {
-      if (event.target.id === "interactive-checkout-drawer") toggleCartDrawer(false);
-    };
-    
-    // Like button interaction
-    document.addEventListener("DOMContentLoaded", () => {
-      renderCatalog();
-      const likeBtn = document.getElementById('likeButton');
-      const likeSpan = document.getElementById('likeCounter');
-      let liked = false;
-      if (likeBtn) {
-        likeBtn.addEventListener('click', () => {
-          let val = parseInt(likeSpan.innerText);
-          if (!liked) { likeSpan.innerText = val + 1; liked = true; likeBtn.style.background = "rgba(127, 40, 255, 0.25)"; }
-          else { likeSpan.innerText = val - 1; liked = false; likeBtn.style.background = "rgba(127, 40, 255, 0.1)"; }
-        });
-      }
-      document.getElementById("global-cart-counter").innerText = "0";
+<div class="drawer-overlay" id="interactive-checkout-drawer" onclick="handleOutsideClick(event)">
+  <div class="drawer-container" id="drawer-container-body"></div>
+</div>
+
+<script>
+  // ---------- PRODUCT DATA (same as before, china stays untouched) ----------
+  const CHINA_REDIRECT_LINKS = [
+    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7776567234&affcode=ZISW0PUI3",
+    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7773626477&affcode=ZISW0PUI3",
+    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7773699603&affcode=ZISW0PUI3",
+    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7773624481&affcode=ZISW0PUI3",
+    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7775450038&affcode=ZISW0PUI3"
+  ];
+  const chinaProductTitles = ["China Shoe supplier", "China Nki Slipper", "China jersey supplier", "China minimalistic baseball cap", "China Casual Trendy Shoulder Bag"];
+  const chinaDescriptions = [
+    "Verified factory-direct footwear supplier. Premium materials & competitive bulk pricing. Secure purchase via Kakobuy.",
+    "Ultra-comfortable Nki slides & slippers — perfect for wholesale or resale. Direct link to trusted vendor.",
+    "Pro-grade soccer & streetwear jerseys. High-quality stitching and breathable fabrics.",
+    "Minimalist curve-brim caps, solid construction, versatile styles. Redirect to verified supplier for bulk orders.",
+    "Trendy everyday shoulder bag, casual chic design. Ideal for retail and dropshipping."
+  ];
+  const chinaImages = [
+    "https://si.geilicdn.com/pcitem901858814557-48000000018f67fd121b0a20e35c_800_600.jpg?w=760&h=760",
+    "https://si.geilicdn.com/pcitem1932596551-5c330000019bb3de18690a81347d_1920_1920.jpg?w=760&h=760",
+    "https://si.geilicdn.com/open1685879877-252808396-11710000019435731f6f0a8115b5_1000_1000.jpg?w=760&h=760",
+    "https://si.geilicdn.com/pcitem901911512620-504800000194250734760a230115_1074_1074.jpg?w=760&h=760",
+    "https://si.geilicdn.com/pcitem901934833296-28ea0000019649cd439a0a20e284-unadjust_937_905.png?w=760&h=760"
+  ];
+  const coreProducts = [
+    { id: 1, title: "Cologne Vendor", description: "The supreme fragrance supplier connection line details. Instant unlock option.", price: 20, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_08_28_PM.webp?v=1775089729&width=600", external: false },
+    { id: 2, title: "Hoodie vendor", description: "Premium quality blank hoodies and heavy cotton manufacturer links.", price: 30, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_07_47_PM.webp?v=1775089782&width=600", external: false },
+    { id: 3, title: "Moissanite vendor", description: "VVS passes tester diamond jewelry luxury manufacturers line verified.", price: 25, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_09_09_PM.webp?v=1775089824&width=600", external: false },
+    { id: 4, title: "Shoe vendor", description: "Highly trusted sneaker drop shipping links with packaging.", price: 30, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_06_55_PM.webp?v=1775089808&width=600", external: false }
+  ];
+  const chinaProducts = [];
+  for (let i = 0; i < CHINA_REDIRECT_LINKS.length; i++) {
+    chinaProducts.push({
+      id: 5 + i, title: chinaProductTitles[i], description: chinaDescriptions[i], price: null, image: chinaImages[i], external: true, externalLink: CHINA_REDIRECT_LINKS[i]
     });
-  </script>
+  }
+  const PRODUCT_DATASET = [...coreProducts, ...chinaProducts];
+
+  // ---------- 13 PAYMENT METHODS ----------
+  const PAYMENT_METHODS = [
+    { name: "Cash App", color: "#00D632", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>` },
+    { name: "Zelle", color: "#741b88", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 17h16M7 7l10 10"/></svg>` },
+    { name: "Venmo", color: "#008CFF", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4l4 16 9-16"/></svg>` },
+    { name: "PayPal", color: "#003087", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4h8a5 5 0 0 1 5 5c0 3-2 5-5 5H9.5L8 20H4z"/></svg>` },
+    { name: "Apple Pay", color: "#ffffff", icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 4a4 4 0 0 0-3 2 4 4 0 0 0 3-2zM12 10c-1-1-3-1-4 0-1 1-2 3-2 4 0 3 2 6 4 6 1 0 2-1 3-1s2 1 3 1c2 0 4-3 4-6 0-1-1-3-2-4 0 0-1 0-2 0z"/></svg>` },
+    { name: "Google Pay", color: "#ffffff", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10-4.5 10-10 10zM12 8v8M9 12h6"/></svg>` },
+    { name: "Credit/Debit Cards", color: "#9ca3af", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>` },
+    { name: "Bank Transfer", color: "#9ca3af", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M4 10h16M2 10l10-7 10 7M6 10v7M10 10v7M14 10v7M18 10v7"/></svg>` },
+    { name: "Chime", color: "#25C85E", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>` },
+    { name: "Cash", color: "#25d366", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/></svg>` },
+    { name: "Cryptocurrency (Bitcoin)", color: "#F7931A", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 8h4a3 3 0 0 1 0 6H9zM9 14h5a3 3 0 0 1 0 6H9zM11 4v4M15 4v4M11 20v-2M15 20v-2M6 8h3M6 14h3"/></svg>` },
+    { name: "Gift cards", color: "#ff4d4f", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M12 8v12M8 8s-1-4-4-4 4 4 4 4zm8 0s1-4 4-4-4 4-4 4z"/></svg>` },
+    { name: "USDT/Binance Pay", color: "#FCD535", icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 10-10 10L2 12 12 2zM12 8v8M8 12h8"/></svg>` }
+  ];
+  const WHATSAPP_TARGET_NUMBER = "16415695059";
+  let cart = [];
+  let itemsInCartTotalCount = 0;
+  let activeDrawerProductId = null;
+  let activeQuantitySelection = 1;
+
+  // ---------- REVIEWS DATA (with likes >=900) ----------
+  const REVIEWS_DATA = [
+    { name: "James T.", date: "2 days ago", rating: 5, text: "Amazing quality! Already seeing great results. The fragrance vendor exceeded expectations.", verified: true, likes: 1240 },
+    { name: "Sarah M.", date: "5 days ago", rating: 5, text: "Best purchase I've made. Everything is legit and works perfectly. Will order again.", verified: true, likes: 987 },
+    { name: "Chris R.", date: "1 week ago", rating: 3, text: "Great value for the price. The bundle deal saved me a lot. Shipping was fast.", verified: true, likes: 903 },
+    { name: "Alex K.", date: "3 days ago", rating: 5, text: "Incredible supplier network. The moissanite vendor is a game changer.", verified: true, likes: 1520 }
+  ];
+
+  function renderReviews() {
+    const container = document.getElementById("reviews-feed-container");
+    if (!container) return;
+    container.innerHTML = REVIEWS_DATA.map((rev, idx) => `
+      <div class="review-card" data-review-idx="${idx}">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <span class="reviewer-name">${rev.name}</span>
+            <span class="review-date">${rev.date}</span>
+          </div>
+          <div class="stars">${"★".repeat(rev.rating)}${"☆".repeat(5-rev.rating)}</div>
+          ${rev.verified ? `<div class="verified-badge"><span>✓</span> Verified Purchase</div>` : ''}
+        </div>
+        <div class="review-text">${rev.text}</div>
+        <div class="review-footer">
+          <button class="like-review-btn" data-review-idx="${idx}">
+            <span class="like-icon">❤️</span>
+            <span class="like-count" id="review-like-${idx}">${rev.likes.toLocaleString()}</span>
+          </button>
+        </div>
+      </div>
+    `);
+    // attach like events
+    document.querySelectorAll('.like-review-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = parseInt(btn.getAttribute('data-review-idx'));
+        if (isNaN(idx)) return;
+        let currentLikes = REVIEWS_DATA[idx].likes;
+        const likeSpan = document.getElementById(`review-like-${idx}`);
+        if (btn.classList.contains('liked')) {
+          REVIEWS_DATA[idx].likes = Math.max(0, currentLikes - 1);
+          likeSpan.innerText = REVIEWS_DATA[idx].likes.toLocaleString();
+          btn.classList.remove('liked');
+        } else {
+          REVIEWS_DATA[idx].likes = currentLikes + 1;
+          likeSpan.innerText = REVIEWS_DATA[idx].likes.toLocaleString();
+          btn.classList.add('liked');
+        }
+      });
+    });
+  }
+
+  function renderCatalog() {
+    const container = document.getElementById("products-catalog-wrapper");
+    container.innerHTML = PRODUCT_DATASET.map(product => {
+      const isExternal = product.external === true;
+      const priceHtml = isExternal ? `<div class="ai-product-card__price"><span style="opacity:0.6; font-size:12px;">🔗 external sourcing</span></div>` : `<div class="ai-product-card__price">$${product.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>`;
+      const buttonClass = isExternal ? "ai-product-card__button ai-product-card__button--external" : "ai-product-card__button";
+      const buttonAction = isExternal ? `redirectToExternal('${product.externalLink}')` : `openProductDrawer(${product.id})`;
+      const buttonText = isExternal ? "Visit Kakobuy →" : "View product";
+      return `<div class="ai-product-card"><div class="ai-product-card__image-wrapper"><img src="${product.image}" class="ai-product-card__image" loading="lazy"></div><div class="ai-product-card__content"><h3 class="ai-product-card__title">${product.title}</h3><p class="ai-product-card__description">${product.description}</p>${priceHtml}<button class="${buttonClass}" onclick="${buttonAction}">${buttonText}</button></div></div>`;
+    }).join('');
+  }
+
+  window.redirectToExternal = (url) => window.open(url, '_blank');
+  function openProductDrawer(productId) {
+    const product = PRODUCT_DATASET.find(p => p.id === productId);
+    if (!product || product.external) return;
+    activeDrawerProductId = productId;
+    activeQuantitySelection = 1;
+    const drawerContainer = document.getElementById("drawer-container-body");
+    drawerContainer.innerHTML = `<div class="drawer-header"><h3>Configure Order</h3><button class="drawer-close" onclick="toggleCartDrawer(false)">✕</button></div><div class="drawer-product-preview"><img src="${product.image}" class="drawer-product-img"><div class="drawer-product-details"><h4>${product.title}</h4><div id="drawer-realtime-price">$${(product.price * activeQuantitySelection).toLocaleString()}</div></div></div><div class="drawer-qty-selector"><span>Select Quantity</span><div><button class="qty-btn" onclick="adjustQuantity(-1)">−</button><span class="qty-val" id="drawer-qty-display">1</span><button class="qty-btn" onclick="adjustQuantity(1)">+</button></div></div><div id="drawer-action-placement-zone"><button class="action-btn action-btn--add" onclick="executeCartAddition()">Add to Cart</button></div>`;
+    toggleCartDrawer(true);
+  }
+  window.adjustQuantity = (delta) => {
+    const product = PRODUCT_DATASET.find(p => p.id === activeDrawerProductId);
+    if (!product) return;
+    activeQuantitySelection = Math.max(1, activeQuantitySelection + delta);
+    document.getElementById("drawer-qty-display").innerText = activeQuantitySelection;
+    document.getElementById("drawer-realtime-price").innerText = `$${(product.price * activeQuantitySelection).toLocaleString()}`;
+  };
+  window.executeCartAddition = () => {
+    const product = PRODUCT_DATASET.find(p => p.id === activeDrawerProductId);
+    if (!product || product.external) return;
+    const existing = cart.find(i => i.product.id === product.id);
+    if (existing) existing.quantity += activeQuantitySelection;
+    else cart.push({ product, quantity: activeQuantitySelection });
+    itemsInCartTotalCount += activeQuantitySelection;
+    document.getElementById("global-cart-counter").innerText = itemsInCartTotalCount;
+    document.getElementById("drawer-action-placement-zone").innerHTML = `<div class="action-row"><button class="action-btn action-btn--secondary" onclick="toggleCartDrawer(false)">Continue Shopping</button><button class="action-btn action-btn--add" onclick="openCartView()">Go to Cart</button></div>`;
+  };
+  window.openCartView = () => {
+    const drawer = document.getElementById("drawer-container-body");
+    if (cart.length === 0) { drawer.innerHTML = `<div class="drawer-header"><h3>Your Cart</h3><button class="drawer-close" onclick="toggleCartDrawer(false)">✕</button></div><p style="text-align:center;padding:30px;">Empty cart</p>`; toggleCartDrawer(true); return; }
+    let itemsHtml = "", total = 0;
+    cart.forEach(i => { const subt = i.product.price * i.quantity; total += subt; itemsHtml += `<div class="cart-item"><img src="${i.product.image}" class="cart-item-img"><div class="cart-item-details"><div class="cart-item-title">${i.product.title}</div><div>Qty: ${i.quantity} | $${i.product.price}/ea</div></div><div>$${subt.toLocaleString()}</div></div>`; });
+    drawer.innerHTML = `<div class="drawer-header"><h3>Your Cart</h3><button class="drawer-close" onclick="toggleCartDrawer(false)">✕</button></div><div>${itemsHtml}</div><div class="cart-total-section"><span>Total:</span><span>$${total.toLocaleString()}</span></div><button class="action-btn action-btn--add" onclick="showPaymentMethods()">Proceed to Checkout</button>`;
+    toggleCartDrawer(true);
+  };
+  window.showPaymentMethods = () => {
+    const drawer = document.getElementById("drawer-container-body");
+    const paymentsHtml = PAYMENT_METHODS.map(m => `<button class="payment-btn" onclick="finalizeOrder('${m.name}')"><div class="payment-icon-wrapper" style="color:${m.color}">${m.icon}</div><span>${m.name}</span></button>`).join('');
+    drawer.innerHTML = `<div class="drawer-header"><h3>Select Payment Method</h3><button class="drawer-close" onclick="toggleCartDrawer(false)">✕</button></div><p style="margin-bottom:16px;">How would you like to pay?</p><div class="payment-grid">${paymentsHtml}</div>`;
+  };
+  window.finalizeOrder = (method) => {
+    if (!cart.length) return;
+    let msg = "Hello The Supply Center! 👋\n\nI want to place an order:\n\n";
+    let total = 0;
+    cart.forEach(i => { const subt = i.product.price * i.quantity; total += subt; msg += `📦 ${i.product.title} x${i.quantity} — $${subt}\n`; });
+    msg += `\n💰 Grand Total: $${total}\n💳 Payment: ${method}\nPlease provide payment details.`;
+    const waLink = `https://wa.me/${WHATSAPP_TARGET_NUMBER}?text=${encodeURIComponent(msg)}`;
+    document.getElementById("drawer-container-body").innerHTML = `<div class="drawer-header"><h3>Checkout Ready</h3><button class="drawer-close" onclick="toggleCartDrawer(false)">✕</button></div><div style="text-align:center;padding:20px"><p>Selected <strong>${method}</strong></p><a href="${waLink}" target="_blank" class="action-btn action-btn--whatsapp">Chat Vendor on WhatsApp</a></div>`;
+  };
+  window.toggleCartDrawer = (show) => { const ov = document.getElementById("interactive-checkout-drawer"); if (show) { ov.classList.add("active"); document.body.style.overflow = "hidden"; } else { ov.classList.remove("active"); document.body.style.overflow = "auto"; } };
+  window.handleOutsideClick = (e) => { if (e.target.id === "interactive-checkout-drawer") toggleCartDrawer(false); };
+  document.addEventListener("DOMContentLoaded", () => {
+    renderCatalog(); renderReviews();
+    const likeBtn = document.getElementById('likeButton'), likeSpan = document.getElementById('likeCounter');
+    let liked = false;
+    if (likeBtn) likeBtn.addEventListener('click', () => { let v = parseInt(likeSpan.innerText); if (!liked) { likeSpan.innerText = v+1; liked=true; likeBtn.style.background="rgba(127,40,255,0.25)"; } else { likeSpan.innerText = v-1; liked=false; likeBtn.style.background="rgba(127,40,255,0.1)"; } });
+    document.getElementById("global-cart-counter").innerText = "0";
+  });
+</script>
 </body>
 </html>
