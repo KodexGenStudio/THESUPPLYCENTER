@@ -733,26 +733,26 @@
 <script>
   // ---------- PRODUCT DATA (same as before, china stays untouched) ----------
   const CHINA_REDIRECT_LINKS = [
-    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7776567234&affcode=ZISW0PUI3",
-    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7773626477&affcode=ZISW0PUI3",
-    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7773699603&affcode=ZISW0PUI3",
-    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7773624481&affcode=ZISW0PUI3",
-    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7775450038&affcode=ZISW0PUI3"
+    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7763476198&affcode=h7y6w2",
+    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7778982831&affcode=h7y6w2",
+    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7758924526&affcode=h7y6w2",
+    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7781907002&affcode=h7y6w2",
+    "https://www.kakobuy.com/item/details?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7778914685&affcode=h7y6w2"
   ];
-  const chinaProductTitles = ["China Shoe supplier", "China Nki Slipper", "China jersey supplier", "China minimalistic baseball cap", "China Casual Trendy Shoulder Bag"];
+  const chinaProductTitles = ["China Shoe Supplier", "China Hoodie Supplier", "China Perfume Supplier", "Summer Men's Polo Large Size", "China Airpods Supplier"];
   const chinaDescriptions = [
-    "Verified factory-direct footwear supplier. Premium materials & competitive bulk pricing. Secure purchase via Kakobuy.",
-    "Ultra-comfortable Nki slides & slippers — perfect for wholesale or resale. Direct link to trusted vendor.",
-    "Pro-grade soccer & streetwear jerseys. High-quality stitching and breathable fabrics.",
-    "Minimalist curve-brim caps, solid construction, versatile styles. Redirect to verified supplier for bulk orders.",
-    "Trendy everyday shoulder bag, casual chic design. Ideal for retail and dropshipping."
+    "Premium shoes supplier with factory-direct deals. Contact: WhatsApp +1 (320) 436-7326",
+    "Quality hoodie supplier for resale and bulk orders. Contact: WhatsApp +1 (320) 436-7326",
+    "Trusted perfume supplier with premium fragrance selections. Contact: WhatsApp +1 (320) 436-7326",
+    "Large-size summer polo supplier offering comfortable styles. Contact: WhatsApp +1 (320) 436-7326",
+    "Reliable AirPods supplier with wholesale opportunities. Contact: WhatsApp +1 (320) 436-7326"
   ];
   const chinaImages = [
-    "https://si.geilicdn.com/pcitem901858814557-48000000018f67fd121b0a20e35c_800_600.jpg?w=760&h=760",
-    "https://si.geilicdn.com/pcitem1932596551-5c330000019bb3de18690a81347d_1920_1920.jpg?w=760&h=760",
-    "https://si.geilicdn.com/open1685879877-252808396-11710000019435731f6f0a8115b5_1000_1000.jpg?w=760&h=760",
-    "https://si.geilicdn.com/pcitem901911512620-504800000194250734760a230115_1074_1074.jpg?w=760&h=760",
-    "https://si.geilicdn.com/pcitem901934833296-28ea0000019649cd439a0a20e284-unadjust_937_905.png?w=760&h=760"
+    "https://si.geilicdn.com/pcitem901858814557-7c500000018f753707490a2395f2_800_600.jpg?w=760&h=760",
+    "https://si.geilicdn.com/open325672604-1234478995-2542000001989e465d500a23b491_800_800.jpg?w=760&h=760",
+    "https://si.geilicdn.com/weidian1958239966-0ddf00000197d47e3b5c0a23047e_1200_1200.jpg?w=760&h=760",
+    "https://si.geilicdn.com/open1652813497-252808396-17db000001940ca820530a239383_1920_1920.jpg?w=760&h=760",
+    "https://si.geilicdn.com/pcitem901862111838-67e600000192eb9993750a2396f4_1080_1440.jpg?w=760&h=760"
   ];
   const coreProducts = [
     { id: 1, title: "Cologne Vendor", description: "The supreme fragrance supplier connection line details. Instant unlock option.", price: 20, image: "https://hmvendors.com/cdn/shop/files/ChatGPT_Image_Apr_1_2026_07_08_28_PM.webp?v=1775089729&width=600", external: false },
@@ -845,7 +845,7 @@
     const container = document.getElementById("products-catalog-wrapper");
     container.innerHTML = PRODUCT_DATASET.map(product => {
       const isExternal = product.external === true;
-      const priceHtml = isExternal ? `<div class="ai-product-card__price"><span style="opacity:0.6; font-size:12px;">🔗 external sourcing</span></div>` : `<div class="ai-product-card__price">$${product.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>`;
+      const priceHtml = isExternal ? `` : `<div class="ai-product-card__price">$${product.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>`;
       const buttonClass = isExternal ? "ai-product-card__button ai-product-card__button--external" : "ai-product-card__button";
       const buttonAction = isExternal ? `redirectToExternal('${product.externalLink}')` : `openProductDrawer(${product.id})`;
       const buttonText = isExternal ? "Visit Kakobuy →" : "View product";
