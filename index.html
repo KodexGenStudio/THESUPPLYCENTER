@@ -762,7 +762,7 @@
   ];
   const chinaProducts = [];
   for (let i = 0; i < CHINA_REDIRECT_LINKS.length; i++) {
-    const chinaPrices = [406.8, 179, 106, 98, 130];
+    const chinaPrices = [60, 26.5, 15.5, 15, 20];
     chinaProducts.push({
       id: 5 + i, title: chinaProductTitles[i], description: chinaDescriptions[i], price: chinaPrices[i], image: chinaImages[i], external: true, externalLink: CHINA_REDIRECT_LINKS[i]
     });
@@ -847,7 +847,7 @@
     container.innerHTML = PRODUCT_DATASET.map(product => {
       const isExternal = product.external === true;
       const priceHtml = isExternal
-        ? `<div class="ai-product-card__price">CNY ¥${product.price}</div>`
+        ? `<div class="ai-product-card__price">$${product.price}</div>`
         : `<div class="ai-product-card__price">$${product.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>`;
       const buttonClass = isExternal ? "ai-product-card__button ai-product-card__button--external" : "ai-product-card__button";
       const buttonAction = isExternal ? `redirectToExternal('${product.externalLink}')` : `openProductDrawer(${product.id})`;
