@@ -767,7 +767,7 @@
       id: 5 + i, title: chinaProductTitles[i], description: chinaDescriptions[i], price: chinaPrices[i], image: chinaImages[i], external: true, externalLink: CHINA_REDIRECT_LINKS[i]
     });
   }
-  const PRODUCT_DATASET = [...coreProducts, ...chinaProducts];
+  const PRODUCT_DATASET = [...coreProducts, ...chinaProducts,{id:10,title:"China Supplier",description:"External supplier link.",price:"External",image:"https://raw.githubusercontent.com/KodexGenStudio/THESUPPLYCENTER/refs/heads/main/IMG-20260708-WA0018.jpg",external:true,externalLink:"https://linkbio.co/pangou"}];
 
   // ---------- 13 PAYMENT METHODS ----------
   const PAYMENT_METHODS = [
@@ -847,11 +847,11 @@
     container.innerHTML = PRODUCT_DATASET.map(product => {
       const isExternal = product.external === true;
       const priceHtml = isExternal
-        ? `<div class="ai-product-card__price">$${product.price}</div>`
+        ? `<div class="ai-product-card__price">${product.price}</div>`
         : `<div class="ai-product-card__price">$${product.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>`;
       const buttonClass = isExternal ? "ai-product-card__button ai-product-card__button--external" : "ai-product-card__button";
       const buttonAction = isExternal ? `redirectToExternal('${product.externalLink}')` : `openProductDrawer(${product.id})`;
-      const buttonText = isExternal ? "Visit Kakobuy →" : "View product";
+      const buttonText = isExternal ? "Visit Website →" : "View product";
       return `<div class="ai-product-card"><div class="ai-product-card__image-wrapper"><img src="${product.image}" class="ai-product-card__image" loading="lazy"></div><div class="ai-product-card__content"><h3 class="ai-product-card__title">${product.title}</h3><p class="ai-product-card__description">${product.description}</p>${priceHtml}<button class="${buttonClass}" onclick="${buttonAction}">${buttonText}</button></div></div>`;
     }).join('');
   }
