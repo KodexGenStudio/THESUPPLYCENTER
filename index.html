@@ -38,7 +38,6 @@
             padding-top: 104px;
         }
 
-        /* Top Promos */
         .promo-bar {
             background: var(--color-bg);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -76,7 +75,6 @@
             color: #fff;
         }
 
-        /* Trust Bar */
         .scaled-trust-bar {
             height: 44px;
             background: transparent;
@@ -124,7 +122,6 @@
             }
         }
 
-        /* Header */
         .header-minimal {
             position: fixed;
             top: 96px;
@@ -228,7 +225,6 @@
             filter: drop-shadow(0 0 5px rgba(140, 43, 255, 0.6));
         }
 
-        /* Product Grid */
         .ai-product-grid {
             width: 100%;
             padding: 64px 20px 32px;
@@ -345,7 +341,6 @@
             background-color: #3a3a3a;
         }
 
-        /* Chat button */
         .chat-btn-small {
             display: inline-flex;
             align-items: center;
@@ -482,7 +477,6 @@
             color: var(--color-accent);
         }
 
-        /* Rating summary */
         .reviews-dashboard {
             background: rgba(20, 20, 20, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -860,7 +854,7 @@
             min-height: 20px;
         }
 
-        /* === CHAT WIDGET (professional) === */
+        /* ===== CHAT WIDGET (user side) ===== */
         .chat-widget-overlay {
             position: fixed;
             bottom: 90px;
@@ -1033,92 +1027,243 @@
             font-size: 14px;
         }
 
-        /* Admin Panel */
+        /* ===== ADMIN PANEL (WhatsApp-style) ===== */
         .admin-panel {
             display: none;
-            padding: 40px 20px;
-            max-width: 1100px;
-            margin: 0 auto;
+            padding: 0;
             background: var(--color-bg);
             min-height: 80vh;
+            position: relative;
         }
         .admin-panel.active {
             display: block;
         }
-        .admin-panel h2 {
-            font-size: 28px;
-            margin-bottom: 24px;
-            color: #fff;
-        }
-        .admin-panel .msg-item {
+        .admin-panel__container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: calc(100vh - 104px);
             background: var(--color-surface);
-            border: 1px solid var(--color-border);
             border-radius: var(--radius);
-            padding: 18px 22px;
-            margin-bottom: 16px;
+            border: 1px solid var(--color-border);
+            overflow: hidden;
         }
-        .admin-panel .msg-item .msg-header {
+        .admin-panel__sidebar {
+            width: 300px;
+            min-width: 250px;
+            border-right: 1px solid var(--color-border);
+            background: #0d0d0d;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .admin-panel__sidebar-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--color-border);
+            font-weight: 700;
+            font-size: 16px;
+            background: #111;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+        }
+        .admin-panel__sidebar-header .back-to-store {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .admin-panel__user-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        .admin-user-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .admin-user-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .admin-user-item.active {
+            background: rgba(127, 40, 255, 0.15);
+            border-left: 3px solid var(--color-accent);
+        }
+        .admin-user-item .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .admin-user-item .user-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .admin-user-item .user-info .name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .admin-user-item .user-info .phone {
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+        .admin-user-item .user-info .last-msg {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .admin-panel__chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #0a0a0a;
+        }
+        .admin-panel__chat-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--color-border);
+            background: #111;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .admin-panel__chat-header .back-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--color-text);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+        .admin-panel__chat-header .user-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .admin-panel__chat-header .user-phone {
             font-size: 13px;
             color: var(--color-text-muted);
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-            gap: 6px;
         }
-        .admin-panel .msg-item .msg-body {
+        .admin-panel__messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .admin-panel__messages .chat-message {
+            max-width: 80%;
+        }
+        .admin-panel__messages .chat-message.admin {
+            align-self: flex-start;
+            background: #2a2a2a;
+            border-left: 4px solid var(--color-success);
+        }
+        .admin-panel__messages .chat-message.self {
+            align-self: flex-end;
+            background: var(--color-accent);
             color: #fff;
-            font-size: 15px;
-            margin-bottom: 12px;
         }
-        .admin-panel .msg-item .reply-area {
+        .admin-panel__input-area {
             display: flex;
             gap: 10px;
-            margin-top: 10px;
-            flex-wrap: wrap;
+            padding: 16px 20px;
+            border-top: 1px solid var(--color-border);
+            background: #111;
+            flex-shrink: 0;
         }
-        .admin-panel .msg-item .reply-area input {
+        .admin-panel__input-area input {
             flex: 1;
-            padding: 8px 14px;
+            padding: 10px 16px;
             border-radius: 30px;
             border: 1px solid var(--color-border);
             background: #222;
             color: #fff;
-            font-size: 13px;
+            font-size: 14px;
             outline: none;
-            min-width: 150px;
         }
-        .admin-panel .msg-item .reply-area input:focus {
+        .admin-panel__input-area input:focus {
             border-color: var(--color-accent);
         }
-        .admin-panel .msg-item .reply-area button {
-            padding: 8px 18px;
+        .admin-panel__input-area button {
+            padding: 10px 22px;
             border: none;
             border-radius: 30px;
             background: var(--color-accent);
             color: #fff;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
             transition: background 0.2s;
             white-space: nowrap;
         }
-        .admin-panel .msg-item .reply-area button:hover {
+        .admin-panel__input-area button:hover {
             background: var(--color-accent-hover);
         }
-        .admin-panel .back-link {
-            display: inline-block;
-            margin-bottom: 24px;
-            color: var(--color-accent);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-        }
-        .admin-panel .back-link:hover {
-            text-decoration: underline;
+        .admin-panel__empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--color-text-muted);
+            font-size: 16px;
+            padding: 20px;
+            text-align: center;
         }
 
-        /* Responsive */
+        /* Responsive admin panel */
+        @media (max-width: 767px) {
+            .admin-panel__container {
+                flex-direction: column;
+                height: auto;
+                border-radius: 0;
+                border: none;
+            }
+            .admin-panel__sidebar {
+                width: 100%;
+                min-width: unset;
+                border-right: none;
+                border-bottom: 1px solid var(--color-border);
+                max-height: 50vh;
+            }
+            .admin-panel__chat-area {
+                min-height: 60vh;
+            }
+            .admin-panel__chat-header .back-btn {
+                display: block;
+            }
+            .admin-panel__sidebar.hidden-on-mobile {
+                display: none;
+            }
+            .admin-panel__chat-area {
+                display: flex;
+            }
+            .admin-panel__chat-area.hidden-on-mobile {
+                display: none;
+            }
+            .admin-panel__container.show-conversation .admin-panel__sidebar {
+                display: none;
+            }
+            .admin-panel__container.show-conversation .admin-panel__chat-area {
+                display: flex;
+            }
+        }
+
         @media (max-width: 989px) {
             .ai-product-grid__grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1166,15 +1311,6 @@
                 bottom: 80px;
                 max-height: 60vh;
                 border-radius: 20px;
-            }
-            .admin-panel {
-                padding: 20px 12px;
-            }
-            .admin-panel .msg-item .reply-area {
-                flex-direction: column;
-            }
-            .admin-panel .msg-item .reply-area input {
-                width: 100%;
             }
         }
         @media (max-width: 430px) {
@@ -1225,15 +1361,12 @@
                     <path d="M3 12h18M3 6h18M3 18h18" />
                 </svg>
             </button>
-
             <a href="#" class="header-minimal__logo">
                 <span class="header-minimal__logo-text">The Supply Center</span>
             </a>
-
             <div class="header-minimal__icon header-minimal__icon--auth" id="authToggleBtn" onclick="toggleAuthModal()">
                 <span id="authBtnLabel">Login</span>
             </div>
-
             <div class="header-minimal__icon" onclick="openCartView()" aria-label="Cart">
                 <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="9" cy="21" r="1"></circle>
@@ -1280,7 +1413,7 @@
         </div>
     </div>
 
-    <!-- CHAT WIDGET -->
+    <!-- CHAT WIDGET (user side) -->
     <div class="chat-widget-overlay" id="chatWidget">
         <div class="chat-widget-header">
             <h4>
@@ -1335,13 +1468,36 @@
         </section>
     </div>
 
-    <!-- ADMIN PANEL -->
+    <!-- ===== ADMIN PANEL (WhatsApp-style) ===== -->
     <div class="admin-panel" id="adminPanel">
-        <div style="max-width:1100px;margin:0 auto;">
-            <a href="#" class="back-link" onclick="closeAdminPanel()">← Back to store</a>
-            <h2>📋 Admin – Chat Messages (China Supplier)</h2>
-            <div id="adminMessagesList">
-                <p style="color:var(--color-text-muted);">Loading messages...</p>
+        <div class="admin-panel__container" id="adminContainer">
+            <!-- Sidebar: user list -->
+            <div class="admin-panel__sidebar" id="adminSidebar">
+                <div class="admin-panel__sidebar-header">
+                    <span>💬 Chats</span>
+                    <a href="#" class="back-to-store" onclick="closeAdminPanel()">← Store</a>
+                </div>
+                <div class="admin-panel__user-list" id="adminUserList">
+                    <div style="padding:20px;color:var(--color-text-muted);">Loading users...</div>
+                </div>
+            </div>
+
+            <!-- Chat area -->
+            <div class="admin-panel__chat-area" id="adminChatArea">
+                <div class="admin-panel__chat-header">
+                    <button class="back-btn" id="adminChatBackBtn" onclick="adminGoBack()">←</button>
+                    <div>
+                        <div class="user-name" id="adminChatUserName">Select a user</div>
+                        <div class="user-phone" id="adminChatUserPhone"></div>
+                    </div>
+                </div>
+                <div class="admin-panel__messages" id="adminMessagesContainer">
+                    <div class="admin-panel__empty">Select a user to view conversation</div>
+                </div>
+                <div class="admin-panel__input-area" id="adminInputArea" style="display:none;">
+                    <input type="text" id="adminReplyInput" placeholder="Type a reply..." />
+                    <button onclick="sendAdminReply()">Reply</button>
+                </div>
             </div>
         </div>
     </div>
@@ -1390,7 +1546,7 @@
         }
 
         // ============================================================
-        //  AUTH — phone + username
+        //  AUTH
         // ============================================================
         let currentUser = null;
 
@@ -1400,27 +1556,18 @@
             const username = document.getElementById('loginUsername').value.trim();
             const errorEl = document.getElementById('loginError');
             errorEl.textContent = '';
-            if (!phone || !username) {
-                errorEl.textContent = 'Please fill in both fields.';
-                return;
-            }
+            if (!phone || !username) { errorEl.textContent = 'Please fill in both fields.'; return; }
             try {
                 const data = await fetchBinData();
                 const users = data.users || [];
                 const user = users.find(u => u.phone === phone && u.username === username);
-                if (!user) {
-                    errorEl.textContent = 'No matching account. Please sign up.';
-                    return;
-                }
+                if (!user) { errorEl.textContent = 'No matching account. Please sign up.'; return; }
                 currentUser = { phone: user.phone, username: user.username };
                 localStorage.setItem('tsc_user', JSON.stringify(currentUser));
                 updateAuthUI();
                 toggleAuthModal(false);
                 showToast(`Welcome back, ${currentUser.username}!`);
-            } catch (err) {
-                errorEl.textContent = 'Something went wrong.';
-                console.error(err);
-            }
+            } catch (err) { errorEl.textContent = 'Something went wrong.'; console.error(err); }
         }
 
         async function handleSignup(e) {
@@ -1431,17 +1578,11 @@
             const successEl = document.getElementById('signupSuccess');
             errorEl.textContent = '';
             successEl.textContent = '';
-            if (!phone || !username) {
-                errorEl.textContent = 'Please fill in all fields.';
-                return;
-            }
+            if (!phone || !username) { errorEl.textContent = 'Please fill in all fields.'; return; }
             try {
                 const data = await fetchBinData();
                 const users = data.users || [];
-                if (users.some(u => u.phone === phone)) {
-                    errorEl.textContent = 'Phone already registered. Please log in.';
-                    return;
-                }
+                if (users.some(u => u.phone === phone)) { errorEl.textContent = 'Phone already registered. Please log in.'; return; }
                 users.push({ phone, username });
                 await saveBinData({ ...data, users });
                 currentUser = { phone, username };
@@ -1449,10 +1590,7 @@
                 updateAuthUI();
                 toggleAuthModal(false);
                 showToast(`Account created! Welcome, ${username}!`);
-            } catch (err) {
-                errorEl.textContent = 'Signup failed.';
-                console.error(err);
-            }
+            } catch (err) { errorEl.textContent = 'Signup failed.'; console.error(err); }
         }
 
         function logoutUser() {
@@ -1464,10 +1602,7 @@
         }
 
         function getStoredUser() {
-            try {
-                const raw = localStorage.getItem('tsc_user');
-                if (raw) return JSON.parse(raw);
-            } catch (_) {}
+            try { const raw = localStorage.getItem('tsc_user'); if (raw) return JSON.parse(raw); } catch (_) {}
             return null;
         }
 
@@ -1509,9 +1644,7 @@
             }
         }
 
-        function handleAuthOutsideClick(e) {
-            if (e.target.id === 'authModal') toggleAuthModal(false);
-        }
+        function handleAuthOutsideClick(e) { if (e.target.id === 'authModal') toggleAuthModal(false); }
 
         function switchAuthTab(tab) {
             document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
@@ -1533,9 +1666,6 @@
             document.getElementById('signupSuccess').textContent = '';
         }
 
-        // ============================================================
-        //  TOAST
-        // ============================================================
         function showToast(msg) {
             const old = document.querySelector('.toast-msg');
             if (old) old.remove();
@@ -1567,10 +1697,11 @@
         }
 
         // ============================================================
-        //  CHAT SYSTEM (vendor id=10) — with admin replies
+        //  CHAT SYSTEM (vendor id=10)
         // ============================================================
         const CHAT_VENDOR_ID = 10;
 
+        // ---- User chat widget ----
         async function loadChatMessages() {
             const container = document.getElementById('chatMessagesContainer');
             try {
@@ -1591,10 +1722,7 @@
                     else senderLabel = `<span class="msg-sender-label">${m.username || 'User'}</span>`;
                     return `<div class="chat-message ${isSelf ? 'self' : ''} ${isAdmin ? 'admin' : ''}">
                         <div>${m.message}</div>
-                        <div class="msg-meta">
-                            ${senderLabel}
-                            <span>${new Date(m.timestamp).toLocaleTimeString()}</span>
-                        </div>
+                        <div class="msg-meta">${senderLabel} <span>${new Date(m.timestamp).toLocaleTimeString()}</span></div>
                     </div>`;
                 }).join('');
                 container.scrollTop = container.scrollHeight;
@@ -1604,11 +1732,8 @@
         }
 
         async function sendChatMessage() {
-            if (!currentUser) {
-                showToast('Please log in to chat.');
-                toggleAuthModal(true);
-                return;
-            }
+            if (!currentUser) { showToast('Please log in to chat.');
+                toggleAuthModal(true); return; }
             const input = document.getElementById('chatInput');
             const text = input.value.trim();
             if (!text) return;
@@ -1629,7 +1754,8 @@
                 await saveBinData({ ...data, chat_messages: messages });
                 loadChatMessages();
                 if (document.getElementById('adminPanel').classList.contains('active')) {
-                    loadAdminMessages();
+                    loadAdminUsers();
+                    if (selectedAdminUser) loadAdminConversation(selectedAdminUser);
                 }
             } catch (e) {
                 showToast('Failed to send message.');
@@ -1637,100 +1763,202 @@
             }
         }
 
-        // Admin reply function
-        async function sendAdminReply(vendorId, message, replyToId) {
-            if (!message.trim()) return;
+        function toggleChatWidget(open) {
+            const widget = document.getElementById('chatWidget');
+            if (open === undefined) widget.classList.toggle('open');
+            else if (open) widget.classList.add('open');
+            else widget.classList.remove('open');
+            if (widget.classList.contains('open')) loadChatMessages();
+        }
+
+        // ---- Admin chat (WhatsApp style) ----
+        let selectedAdminUser = null; // phone number of selected user
+
+        async function loadAdminUsers() {
+            const container = document.getElementById('adminUserList');
             try {
                 const data = await fetchBinData();
                 const messages = data.chat_messages || [];
+                const vendorMessages = messages.filter(m => m.vendorId === CHAT_VENDOR_ID);
+                // Group by phone
+                const userMap = new Map();
+                vendorMessages.forEach(m => {
+                    if (m.sender === 'admin') return; // ignore admin messages for user list? we want users who sent messages
+                    if (!m.phone) return;
+                    if (!userMap.has(m.phone)) {
+                        userMap.set(m.phone, {
+                            phone: m.phone,
+                            username: m.username || 'User',
+                            lastMsg: m.message,
+                            lastTime: m.timestamp
+                        });
+                    } else {
+                        const existing = userMap.get(m.phone);
+                        if (new Date(m.timestamp) > new Date(existing.lastTime)) {
+                            existing.lastMsg = m.message;
+                            existing.lastTime = m.timestamp;
+                        }
+                    }
+                });
+                const users = Array.from(userMap.values()).sort((a, b) => new Date(b.lastTime) - new Date(a.lastTime));
+                if (users.length === 0) {
+                    container.innerHTML = `<div style="padding:20px;color:var(--color-text-muted);">No users have messaged yet.</div>`;
+                    return;
+                }
+                container.innerHTML = users.map(u => `
+                    <div class="admin-user-item ${selectedAdminUser === u.phone ? 'active' : ''}" data-phone="${u.phone}" onclick="selectAdminUser('${u.phone}')">
+                        <div class="avatar">${u.username.charAt(0).toUpperCase()}</div>
+                        <div class="user-info">
+                            <div class="name">${u.username}</div>
+                            <div class="phone">${u.phone}</div>
+                            <div class="last-msg">${u.lastMsg}</div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                container.innerHTML = `<div style="padding:20px;color:var(--color-text-muted);">Error loading users.</div>`;
+            }
+        }
+
+        async function selectAdminUser(phone) {
+            selectedAdminUser = phone;
+            // Update active state in list
+            document.querySelectorAll('.admin-user-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.phone === phone);
+            });
+            // Show conversation
+            await loadAdminConversation(phone);
+            // On mobile, hide sidebar and show chat area
+            const container = document.getElementById('adminContainer');
+            if (window.innerWidth <= 767) {
+                container.classList.add('show-conversation');
+            }
+            document.getElementById('adminInputArea').style.display = 'flex';
+        }
+
+        async function loadAdminConversation(phone) {
+            const container = document.getElementById('adminMessagesContainer');
+            const userNameEl = document.getElementById('adminChatUserName');
+            const userPhoneEl = document.getElementById('adminChatUserPhone');
+            try {
+                const data = await fetchBinData();
+                const messages = data.chat_messages || [];
+                const vendorMessages = messages.filter(m => m.vendorId === CHAT_VENDOR_ID && (m.phone === phone || (m
+                .sender === 'admin' && m.replyTo)));
+                // Also include admin messages that are replies to this user? We'll just show all messages where phone matches or sender is admin with replyTo matching a user message.
+                // Simpler: show all messages for this vendor where phone is the user's phone OR sender is admin and replyTo points to a message from this user.
+                // But we can just filter by phone = user's phone OR (sender = admin and replyTo exists and that replyTo is in this user's messages)
+                // For simplicity, we'll just show messages where phone === phone OR sender === 'admin' (but that would show all admin messages to all users)
+                // Better: include admin messages that are replies to this user's messages (by checking replyTo in the user's messages)
+                // To keep it simple, we'll filter messages where phone === phone OR (sender === 'admin' and replyTo is in the list of user messages)
+                const userMsgIds = vendorMessages.filter(m => m.phone === phone).map(m => m.id);
+                const filtered = vendorMessages.filter(m =>
+                    m.phone === phone || (m.sender === 'admin' && userMsgIds.includes(m.replyTo)) || (m.sender === 'admin' &&
+                        m.replyTo === null && !m.phone)
+                );
+                // But to avoid showing unrelated admin messages, we'll only show admin messages that have a replyTo matching a user message.
+                // Let's just show all messages where phone matches, plus admin messages that have replyTo in the user's messages.
+                // Actually, to include all admin replies, we can just show messages where phone === phone OR (sender === 'admin' and replyTo exists and replyTo is in the user's message IDs)
+                // If admin sends a new message without replyTo (like a proactive message), we'll include it if we set phone to empty. We'll not do that.
+                // For now, we'll just show all messages from that user plus all admin messages that have a replyTo matching one of the user's messages.
+                const finalMessages = vendorMessages.filter(m => {
+                    if (m.phone === phone) return true;
+                    if (m.sender === 'admin' && m.replyTo && userMsgIds.includes(m.replyTo)) return true;
+                    return false;
+                });
+                finalMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+                if (finalMessages.length === 0) {
+                    container.innerHTML = `<div class="admin-panel__empty">No messages with this user.</div>`;
+                    userNameEl.textContent = 'User';
+                    userPhoneEl.textContent = phone;
+                    return;
+                }
+                const user = finalMessages.find(m => m.phone === phone);
+                userNameEl.textContent = user ? user.username : 'User';
+                userPhoneEl.textContent = phone;
+                container.innerHTML = finalMessages.map(m => {
+                    const isSelf = m.sender === 'admin';
+                    const isAdmin = m.sender === 'admin';
+                    let senderLabel = isAdmin ? 'Admin' : (m.username || 'User');
+                    return `<div class="chat-message ${isSelf ? 'self' : ''} ${isAdmin ? 'admin' : ''}">
+                        <div>${m.message}</div>
+                        <div class="msg-meta"><span class="msg-sender-label">${senderLabel}</span> <span>${new Date(m.timestamp).toLocaleTimeString()}</span></div>
+                    </div>`;
+                }).join('');
+                container.scrollTop = container.scrollHeight;
+                // Show input
+                document.getElementById('adminInputArea').style.display = 'flex';
+            } catch (e) {
+                container.innerHTML = `<div class="admin-panel__empty">Error loading conversation.</div>`;
+            }
+        }
+
+        async function sendAdminReply() {
+            const input = document.getElementById('adminReplyInput');
+            const text = input.value.trim();
+            if (!text || !selectedAdminUser) return;
+            input.value = '';
+            try {
+                const data = await fetchBinData();
+                const messages = data.chat_messages || [];
+                // Find the latest message from this user to reply to (optional)
+                const userMessages = messages.filter(m => m.phone === selectedAdminUser && m.sender === 'user');
+                const lastUserMsg = userMessages.length ? userMessages[userMessages.length - 1] : null;
                 const newMsg = {
                     id: 'msg_' + Date.now(),
-                    vendorId: vendorId,
-                    phone: '',
+                    vendorId: CHAT_VENDOR_ID,
+                    phone: '', // admin messages don't have a phone
                     username: 'Admin',
-                    message: message.trim(),
+                    message: text,
                     sender: 'admin',
-                    replyTo: replyToId || null,
+                    replyTo: lastUserMsg ? lastUserMsg.id : null,
                     timestamp: new Date().toISOString()
                 };
                 messages.push(newMsg);
                 await saveBinData({ ...data, chat_messages: messages });
-                loadAdminMessages(); // refresh admin panel
+                // Refresh conversation
+                loadAdminConversation(selectedAdminUser);
+                // Refresh user list (to show latest)
+                loadAdminUsers();
+                // If user chat widget is open, refresh it
                 if (document.getElementById('chatWidget').classList.contains('open')) {
-                    loadChatMessages(); // refresh chat widget if open
+                    loadChatMessages();
                 }
-                showToast('Reply sent.');
             } catch (e) {
                 showToast('Failed to send reply.');
                 console.error(e);
             }
         }
 
-        function toggleChatWidget(open) {
-            const widget = document.getElementById('chatWidget');
-            if (open === undefined) {
-                widget.classList.toggle('open');
-            } else if (open) {
-                widget.classList.add('open');
-            } else {
-                widget.classList.remove('open');
-            }
-            if (widget.classList.contains('open')) {
-                loadChatMessages();
-            }
+        // Admin panel navigation (mobile)
+        function adminGoBack() {
+            const container = document.getElementById('adminContainer');
+            container.classList.remove('show-conversation');
+            document.getElementById('adminInputArea').style.display = 'none';
+            // Deselect user
+            selectedAdminUser = null;
+            document.querySelectorAll('.admin-user-item').forEach(el => el.classList.remove('active'));
+            document.getElementById('adminMessagesContainer').innerHTML =
+                `<div class="admin-panel__empty">Select a user to view conversation</div>`;
+            document.getElementById('adminChatUserName').textContent = 'Select a user';
+            document.getElementById('adminChatUserPhone').textContent = '';
         }
 
-        // ============================================================
-        //  ADMIN PANEL
-        // ============================================================
-        async function loadAdminMessages() {
-            const container = document.getElementById('adminMessagesList');
-            try {
-                const data = await fetchBinData();
-                const messages = data.chat_messages || [];
-                const vendorMessages = messages.filter(m => m.vendorId === CHAT_VENDOR_ID);
-                if (vendorMessages.length === 0) {
-                    container.innerHTML = `<p style="color:var(--color-text-muted);">No messages from this vendor yet.</p>`;
-                    return;
-                }
-                // Show newest first
-                vendorMessages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-                container.innerHTML = vendorMessages.map(m => `
-                    <div class="msg-item" data-msg-id="${m.id}">
-                        <div class="msg-header">
-                            <span><strong>${m.sender === 'admin' ? 'Admin' : (m.username || 'User')}</strong> ${m.sender === 'admin' ? '' : `(${m.phone || 'no phone'})`}</span>
-                            <span>${new Date(m.timestamp).toLocaleString()}</span>
-                        </div>
-                        <div class="msg-body">${m.message}</div>
-                        <div class="reply-area">
-                            <input type="text" placeholder="Reply to this message..." class="reply-input" />
-                            <button onclick="handleAdminReply(this)">Reply</button>
-                        </div>
-                    </div>
-                `).join('');
-            } catch (e) {
-                container.innerHTML = `<p style="color:var(--color-text-muted);">Error loading messages.</p>`;
-            }
-        }
-
-        // Handle admin reply from a specific message
-        window.handleAdminReply = function(btn) {
-            const item = btn.closest('.msg-item');
-            const input = item.querySelector('.reply-input');
-            const text = input.value.trim();
-            if (!text) {
-                showToast('Please type a reply.');
-                return;
-            }
-            const msgId = item.getAttribute('data-msg-id');
-            sendAdminReply(CHAT_VENDOR_ID, text, msgId);
-            input.value = '';
-        };
-
+        // Open admin panel
         function openAdminPanel() {
             document.getElementById('home-view').style.display = 'none';
             document.getElementById('adminPanel').classList.add('active');
-            loadAdminMessages();
+            // Reset state
+            selectedAdminUser = null;
+            document.getElementById('adminInputArea').style.display = 'none';
+            document.getElementById('adminMessagesContainer').innerHTML =
+                `<div class="admin-panel__empty">Select a user to view conversation</div>`;
+            document.getElementById('adminChatUserName').textContent = 'Select a user';
+            document.getElementById('adminChatUserPhone').textContent = '';
+            loadAdminUsers();
+            // On mobile, hide conversation view
+            const container = document.getElementById('adminContainer');
+            container.classList.remove('show-conversation');
         }
 
         function closeAdminPanel() {
@@ -1748,6 +1976,34 @@
                 }
             }
         });
+
+        // ============================================================
+        //  POLLING (auto-refresh)
+        // ============================================================
+        let pollInterval = null;
+
+        function startPolling() {
+            if (pollInterval) clearInterval(pollInterval);
+            pollInterval = setInterval(() => {
+                const isAdminOpen = document.getElementById('adminPanel').classList.contains('active');
+                const isChatOpen = document.getElementById('chatWidget').classList.contains('open');
+                if (isAdminOpen) {
+                    loadAdminUsers();
+                    if (selectedAdminUser) loadAdminConversation(selectedAdminUser);
+                }
+                if (isChatOpen) {
+                    loadChatMessages();
+                }
+            }, 5000); // refresh every 5 seconds
+        }
+
+        // Stop polling when not needed (optional)
+        function stopPolling() {
+            if (pollInterval) {
+                clearInterval(pollInterval);
+                pollInterval = null;
+            }
+        }
 
         // ============================================================
         //  PRODUCT DATA
@@ -2167,7 +2423,28 @@
             document.getElementById('chatInput').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') sendChatMessage();
             });
+
+            document.getElementById('adminReplyInput').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') sendAdminReply();
+            });
+
+            // Start polling for real-time updates
+            startPolling();
+
+            // Also poll on visibility change to keep fresh
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) {
+                    // refresh when tab becomes active
+                    if (document.getElementById('adminPanel').classList.contains('active')) {
+                        loadAdminUsers();
+                        if (selectedAdminUser) loadAdminConversation(selectedAdminUser);
+                    }
+                    if (document.getElementById('chatWidget').classList.contains('open')) {
+                        loadChatMessages();
+                    }
+                }
+            });
         });
     </script>
 </body>
-</html>
+    </html>
