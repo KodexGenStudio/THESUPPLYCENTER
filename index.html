@@ -262,6 +262,25 @@
             transform: translateY(-4px);
             box-shadow: var(--shadow);
         }
+        .ai-product-card.killed {
+            opacity: 0.3;
+            pointer-events: none;
+            filter: grayscale(1);
+        }
+        .ai-product-card.killed::after {
+            content: "KILLED";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-size: 32px;
+            font-weight: 900;
+            color: #ff3333;
+            letter-spacing: 6px;
+            text-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+            z-index: 5;
+            pointer-events: none;
+        }
         .ai-product-card__image-wrapper {
             position: relative;
             width: 100%;
@@ -854,7 +873,7 @@
             min-height: 20px;
         }
 
-        /* ===== CHAT WIDGET (user side) ===== */
+        /* ===== CHAT WIDGET (user side — PRIVATE) ===== */
         .chat-widget-overlay {
             position: fixed;
             bottom: 90px;
@@ -1226,47 +1245,227 @@
             text-align: center;
         }
 
-        /* Responsive admin panel */
-        @media (max-width: 767px) {
-            .admin-panel__container {
-                flex-direction: column;
-                height: auto;
-                border-radius: 0;
-                border: none;
-            }
-            .admin-panel__sidebar {
-                width: 100%;
-                min-width: unset;
-                border-right: none;
-                border-bottom: 1px solid var(--color-border);
-                max-height: 50vh;
-            }
-            .admin-panel__chat-area {
-                min-height: 60vh;
-            }
-            .admin-panel__chat-header .back-btn {
-                display: block;
-            }
-            .admin-panel__sidebar.hidden-on-mobile {
-                display: none;
-            }
-            .admin-panel__chat-area {
-                display: flex;
-            }
-            .admin-panel__chat-area.hidden-on-mobile {
-                display: none;
-            }
-            .admin-panel__container.show-conversation .admin-panel__sidebar {
-                display: none;
-            }
-            .admin-panel__container.show-conversation .admin-panel__chat-area {
-                display: flex;
-            }
+        /* ===== KILL PANEL ===== */
+        .kill-panel {
+            display: none;
+            padding: 20px;
+            background: var(--color-bg);
+            min-height: 80vh;
+            position: relative;
+        }
+        .kill-panel.active {
+            display: block;
+        }
+        .kill-panel__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--color-surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--color-border);
+            padding: 24px;
+        }
+        .kill-panel__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .kill-panel__header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff4444;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .kill-panel__header .back-link {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .kill-panel__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .kill-item {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: border-color 0.2s;
+        }
+        .kill-item.killed {
+            border-color: #ff3333;
+            background: rgba(255, 0, 0, 0.05);
+        }
+        .kill-item__image {
+            width: 56px;
+            height: 56px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: #1a1a1a;
+            flex-shrink: 0;
+        }
+        .kill-item__info {
+            flex: 1;
+            min-width: 0;
+        }
+        .kill-item__info .title {
+            font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .kill-item__info .sub {
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+        .kill-item__info .status-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-top: 4px;
+        }
+        .status-badge.alive {
+            background: rgba(37, 211, 102, 0.15);
+            color: #25d366;
+            border: 1px solid rgba(37, 211, 102, 0.3);
+        }
+        .status-badge.dead {
+            background: rgba(255, 51, 51, 0.15);
+            color: #ff4444;
+            border: 1px solid rgba(255, 51, 51, 0.3);
+        }
+        .kill-item__action {
+            flex-shrink: 0;
+        }
+        .kill-item__action button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .kill-item__action .btn-kill {
+            background: #ff3333;
+            color: #fff;
+        }
+        .kill-item__action .btn-kill:hover {
+            background: #cc0000;
+        }
+        .kill-item__action .btn-unhide {
+            background: #25d366;
+            color: #000;
+        }
+        .kill-item__action .btn-unhide:hover {
+            background: #1ebe5c;
         }
 
+        /* ===== PASSWORD MODAL FOR KILL PANEL ===== */
+        .kill-password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 400;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .kill-password-overlay.active {
+            display: flex;
+        }
+        .kill-password-box {
+            background: #141414;
+            border: 1px solid var(--color-border);
+            border-radius: 24px;
+            padding: 32px 28px;
+            max-width: 380px;
+            width: 92%;
+            text-align: center;
+        }
+        .kill-password-box h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ff4444;
+        }
+        .kill-password-box p {
+            color: var(--color-text-muted);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .kill-password-box input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            margin-bottom: 16px;
+        }
+        .kill-password-box input:focus {
+            border-color: var(--color-accent);
+        }
+        .kill-password-box .error {
+            color: #ff6b6b;
+            font-size: 13px;
+            min-height: 20px;
+            margin-bottom: 8px;
+        }
+        .kill-password-box .btn-row {
+            display: flex;
+            gap: 10px;
+        }
+        .kill-password-box .btn-row button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .kill-password-box .btn-row .btn-cancel {
+            background: #2a2a2a;
+            color: #fff;
+        }
+        .kill-password-box .btn-row .btn-cancel:hover {
+            background: #3a3a3a;
+        }
+        .kill-password-box .btn-row .btn-unlock {
+            background: var(--color-accent);
+            color: #fff;
+        }
+        .kill-password-box .btn-row .btn-unlock:hover {
+            background: var(--color-accent-hover);
+        }
+
+        /* Responsive */
         @media (max-width: 989px) {
             .ai-product-grid__grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            .kill-panel__grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             }
         }
         @media (max-width: 767px) {
@@ -1311,6 +1510,40 @@
                 bottom: 80px;
                 max-height: 60vh;
                 border-radius: 20px;
+            }
+            .admin-panel__container {
+                flex-direction: column;
+                height: auto;
+                border-radius: 0;
+                border: none;
+            }
+            .admin-panel__sidebar {
+                width: 100%;
+                min-width: unset;
+                border-right: none;
+                border-bottom: 1px solid var(--color-border);
+                max-height: 50vh;
+            }
+            .admin-panel__chat-area {
+                min-height: 60vh;
+            }
+            .admin-panel__chat-header .back-btn {
+                display: block;
+            }
+            .admin-panel__sidebar.hidden-on-mobile {
+                display: none;
+            }
+            .admin-panel__chat-area.hidden-on-mobile {
+                display: none;
+            }
+            .admin-panel__container.show-conversation .admin-panel__sidebar {
+                display: none;
+            }
+            .admin-panel__container.show-conversation .admin-panel__chat-area {
+                display: flex;
+            }
+            .kill-panel__grid {
+                grid-template-columns: 1fr;
             }
         }
         @media (max-width: 430px) {
@@ -1413,7 +1646,7 @@
         </div>
     </div>
 
-    <!-- CHAT WIDGET (user side) -->
+    <!-- ===== CHAT WIDGET (user side — PRIVATE) ===== -->
     <div class="chat-widget-overlay" id="chatWidget">
         <div class="chat-widget-header">
             <h4>
@@ -1428,6 +1661,33 @@
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="Type a message..." />
             <button onclick="sendChatMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- ===== KILL PASSWORD OVERLAY ===== -->
+    <div class="kill-password-overlay" id="killPasswordOverlay">
+        <div class="kill-password-box">
+            <h3>🔐 Kill Panel</h3>
+            <p>Enter the administrator password to access the kill panel.</p>
+            <input type="password" id="killPasswordInput" placeholder="Password" />
+            <div class="error" id="killPasswordError"></div>
+            <div class="btn-row">
+                <button class="btn-cancel" onclick="closeKillPassword()">Cancel</button>
+                <button class="btn-unlock" onclick="unlockKillPanel()">Unlock</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== KILL PANEL ===== -->
+    <div class="kill-panel" id="killPanel">
+        <div class="kill-panel__container">
+            <div class="kill-panel__header">
+                <h2>☠️ Kill Panel <span style="font-size:14px;font-weight:400;color:var(--color-text-muted);">manage product visibility</span></h2>
+                <a href="#" class="back-link" onclick="closeKillPanel()">← Back to Store</a>
+            </div>
+            <div class="kill-panel__grid" id="killPanelGrid">
+                <!-- populated by JS -->
+            </div>
         </div>
     </div>
 
@@ -1697,32 +1957,47 @@
         }
 
         // ============================================================
-        //  CHAT SYSTEM (vendor id=10)
+        //  CHAT SYSTEM (vendor id=10) — PRIVATE per user
         // ============================================================
         const CHAT_VENDOR_ID = 10;
 
-        // ---- User chat widget ----
+        // ---- User chat widget - PRIVATE ----
         async function loadChatMessages() {
             const container = document.getElementById('chatMessagesContainer');
+            if (!currentUser) {
+                container.innerHTML = `<div class="chat-empty">🔒 Please log in to view your messages.</div>`;
+                return;
+            }
             try {
                 const data = await fetchBinData();
-                const messages = data.chat_messages || [];
-                const vendorMessages = messages.filter(m => m.vendorId === CHAT_VENDOR_ID);
-                if (vendorMessages.length === 0) {
+                const allMessages = data.chat_messages || [];
+                const vendorMessages = allMessages.filter(m => m.vendorId === CHAT_VENDOR_ID);
+
+                // Get messages from this user
+                const userMessages = vendorMessages.filter(m => m.phone === currentUser.phone && m.sender === 'user');
+                const userMsgIds = new Set(userMessages.map(m => m.id));
+
+                // Get admin replies to this user's messages
+                const adminReplies = vendorMessages.filter(m =>
+                    m.sender === 'admin' && m.replyTo && userMsgIds.has(m.replyTo)
+                );
+
+                // Combine and sort
+                const allUserMessages = [...userMessages, ...adminReplies];
+                allUserMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+                if (allUserMessages.length === 0) {
                     container.innerHTML = `<div class="chat-empty">No messages yet. Start a conversation!</div>`;
                     return;
                 }
-                vendorMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-                container.innerHTML = vendorMessages.map(m => {
-                    const isSelf = currentUser && m.phone === currentUser.phone && m.sender === 'user';
+
+                container.innerHTML = allUserMessages.map(m => {
+                    const isSelf = m.sender === 'user';
                     const isAdmin = m.sender === 'admin';
-                    let senderLabel = '';
-                    if (isAdmin) senderLabel = '<span class="msg-sender-label">Admin</span>';
-                    else if (isSelf) senderLabel = '<span class="msg-sender-label">You</span>';
-                    else senderLabel = `<span class="msg-sender-label">${m.username || 'User'}</span>`;
+                    let senderLabel = isAdmin ? 'Admin' : 'You';
                     return `<div class="chat-message ${isSelf ? 'self' : ''} ${isAdmin ? 'admin' : ''}">
                         <div>${m.message}</div>
-                        <div class="msg-meta">${senderLabel} <span>${new Date(m.timestamp).toLocaleTimeString()}</span></div>
+                        <div class="msg-meta"><span class="msg-sender-label">${senderLabel}</span> <span>${new Date(m.timestamp).toLocaleTimeString()}</span></div>
                     </div>`;
                 }).join('');
                 container.scrollTop = container.scrollHeight;
@@ -1771,8 +2046,8 @@
             if (widget.classList.contains('open')) loadChatMessages();
         }
 
-        // ---- Admin chat (WhatsApp style) ----
-        let selectedAdminUser = null; // phone number of selected user
+        // ---- Admin chat ----
+        let selectedAdminUser = null;
 
         async function loadAdminUsers() {
             const container = document.getElementById('adminUserList');
@@ -1780,10 +2055,9 @@
                 const data = await fetchBinData();
                 const messages = data.chat_messages || [];
                 const vendorMessages = messages.filter(m => m.vendorId === CHAT_VENDOR_ID);
-                // Group by phone
                 const userMap = new Map();
                 vendorMessages.forEach(m => {
-                    if (m.sender === 'admin') return; // ignore admin messages for user list? we want users who sent messages
+                    if (m.sender === 'admin') return;
                     if (!m.phone) return;
                     if (!userMap.has(m.phone)) {
                         userMap.set(m.phone, {
@@ -1802,7 +2076,8 @@
                 });
                 const users = Array.from(userMap.values()).sort((a, b) => new Date(b.lastTime) - new Date(a.lastTime));
                 if (users.length === 0) {
-                    container.innerHTML = `<div style="padding:20px;color:var(--color-text-muted);">No users have messaged yet.</div>`;
+                    container.innerHTML =
+                        `<div style="padding:20px;color:var(--color-text-muted);">No users have messaged yet.</div>`;
                     return;
                 }
                 container.innerHTML = users.map(u => `
@@ -1822,13 +2097,10 @@
 
         async function selectAdminUser(phone) {
             selectedAdminUser = phone;
-            // Update active state in list
             document.querySelectorAll('.admin-user-item').forEach(el => {
                 el.classList.toggle('active', el.dataset.phone === phone);
             });
-            // Show conversation
             await loadAdminConversation(phone);
-            // On mobile, hide sidebar and show chat area
             const container = document.getElementById('adminContainer');
             if (window.innerWidth <= 767) {
                 container.classList.add('show-conversation');
@@ -1843,50 +2115,39 @@
             try {
                 const data = await fetchBinData();
                 const messages = data.chat_messages || [];
-                const vendorMessages = messages.filter(m => m.vendorId === CHAT_VENDOR_ID && (m.phone === phone || (m
-                .sender === 'admin' && m.replyTo)));
-                // Also include admin messages that are replies to this user? We'll just show all messages where phone matches or sender is admin with replyTo matching a user message.
-                // Simpler: show all messages for this vendor where phone is the user's phone OR sender is admin and replyTo points to a message from this user.
-                // But we can just filter by phone = user's phone OR (sender = admin and replyTo exists and that replyTo is in this user's messages)
-                // For simplicity, we'll just show messages where phone === phone OR sender === 'admin' (but that would show all admin messages to all users)
-                // Better: include admin messages that are replies to this user's messages (by checking replyTo in the user's messages)
-                // To keep it simple, we'll filter messages where phone === phone OR (sender === 'admin' and replyTo is in the list of user messages)
-                const userMsgIds = vendorMessages.filter(m => m.phone === phone).map(m => m.id);
-                const filtered = vendorMessages.filter(m =>
-                    m.phone === phone || (m.sender === 'admin' && userMsgIds.includes(m.replyTo)) || (m.sender === 'admin' &&
-                        m.replyTo === null && !m.phone)
+                const vendorMessages = messages.filter(m => m.vendorId === CHAT_VENDOR_ID);
+
+                // Get user's messages
+                const userMsgs = vendorMessages.filter(m => m.phone === phone && m.sender === 'user');
+                const userMsgIds = new Set(userMsgs.map(m => m.id));
+
+                // Get admin replies to this user
+                const adminReplies = vendorMessages.filter(m =>
+                    m.sender === 'admin' && m.replyTo && userMsgIds.has(m.replyTo)
                 );
-                // But to avoid showing unrelated admin messages, we'll only show admin messages that have a replyTo matching a user message.
-                // Let's just show all messages where phone matches, plus admin messages that have replyTo in the user's messages.
-                // Actually, to include all admin replies, we can just show messages where phone === phone OR (sender === 'admin' and replyTo exists and replyTo is in the user's message IDs)
-                // If admin sends a new message without replyTo (like a proactive message), we'll include it if we set phone to empty. We'll not do that.
-                // For now, we'll just show all messages from that user plus all admin messages that have a replyTo matching one of the user's messages.
-                const finalMessages = vendorMessages.filter(m => {
-                    if (m.phone === phone) return true;
-                    if (m.sender === 'admin' && m.replyTo && userMsgIds.includes(m.replyTo)) return true;
-                    return false;
-                });
-                finalMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-                if (finalMessages.length === 0) {
+
+                const allMsgs = [...userMsgs, ...adminReplies];
+                allMsgs.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+                if (allMsgs.length === 0) {
                     container.innerHTML = `<div class="admin-panel__empty">No messages with this user.</div>`;
                     userNameEl.textContent = 'User';
                     userPhoneEl.textContent = phone;
                     return;
                 }
-                const user = finalMessages.find(m => m.phone === phone);
+                const user = allMsgs.find(m => m.phone === phone);
                 userNameEl.textContent = user ? user.username : 'User';
                 userPhoneEl.textContent = phone;
-                container.innerHTML = finalMessages.map(m => {
+                container.innerHTML = allMsgs.map(m => {
                     const isSelf = m.sender === 'admin';
                     const isAdmin = m.sender === 'admin';
-                    let senderLabel = isAdmin ? 'Admin' : (m.username || 'User');
+                    const senderLabel = isAdmin ? 'Admin' : (m.username || 'User');
                     return `<div class="chat-message ${isSelf ? 'self' : ''} ${isAdmin ? 'admin' : ''}">
                         <div>${m.message}</div>
                         <div class="msg-meta"><span class="msg-sender-label">${senderLabel}</span> <span>${new Date(m.timestamp).toLocaleTimeString()}</span></div>
                     </div>`;
                 }).join('');
                 container.scrollTop = container.scrollHeight;
-                // Show input
                 document.getElementById('adminInputArea').style.display = 'flex';
             } catch (e) {
                 container.innerHTML = `<div class="admin-panel__empty">Error loading conversation.</div>`;
@@ -1901,13 +2162,12 @@
             try {
                 const data = await fetchBinData();
                 const messages = data.chat_messages || [];
-                // Find the latest message from this user to reply to (optional)
                 const userMessages = messages.filter(m => m.phone === selectedAdminUser && m.sender === 'user');
                 const lastUserMsg = userMessages.length ? userMessages[userMessages.length - 1] : null;
                 const newMsg = {
                     id: 'msg_' + Date.now(),
                     vendorId: CHAT_VENDOR_ID,
-                    phone: '', // admin messages don't have a phone
+                    phone: '',
                     username: 'Admin',
                     message: text,
                     sender: 'admin',
@@ -1916,11 +2176,8 @@
                 };
                 messages.push(newMsg);
                 await saveBinData({ ...data, chat_messages: messages });
-                // Refresh conversation
                 loadAdminConversation(selectedAdminUser);
-                // Refresh user list (to show latest)
                 loadAdminUsers();
-                // If user chat widget is open, refresh it
                 if (document.getElementById('chatWidget').classList.contains('open')) {
                     loadChatMessages();
                 }
@@ -1930,12 +2187,10 @@
             }
         }
 
-        // Admin panel navigation (mobile)
         function adminGoBack() {
             const container = document.getElementById('adminContainer');
             container.classList.remove('show-conversation');
             document.getElementById('adminInputArea').style.display = 'none';
-            // Deselect user
             selectedAdminUser = null;
             document.querySelectorAll('.admin-user-item').forEach(el => el.classList.remove('active'));
             document.getElementById('adminMessagesContainer').innerHTML =
@@ -1944,11 +2199,9 @@
             document.getElementById('adminChatUserPhone').textContent = '';
         }
 
-        // Open admin panel
         function openAdminPanel() {
             document.getElementById('home-view').style.display = 'none';
             document.getElementById('adminPanel').classList.add('active');
-            // Reset state
             selectedAdminUser = null;
             document.getElementById('adminInputArea').style.display = 'none';
             document.getElementById('adminMessagesContainer').innerHTML =
@@ -1956,7 +2209,6 @@
             document.getElementById('adminChatUserName').textContent = 'Select a user';
             document.getElementById('adminChatUserPhone').textContent = '';
             loadAdminUsers();
-            // On mobile, hide conversation view
             const container = document.getElementById('adminContainer');
             container.classList.remove('show-conversation');
         }
@@ -1967,42 +2219,141 @@
             window.location.hash = '';
         }
 
-        window.addEventListener('hashchange', () => {
-            if (window.location.hash === '#adminpanel') {
-                openAdminPanel();
-            } else {
-                if (document.getElementById('adminPanel').classList.contains('active')) {
-                    closeAdminPanel();
-                }
-            }
-        });
-
         // ============================================================
-        //  POLLING (auto-refresh)
+        //  KILL PANEL
         // ============================================================
-        let pollInterval = null;
+        const KILL_PASSWORD = 'b@4sHA22';
+        let killPanelUnlocked = false;
 
-        function startPolling() {
-            if (pollInterval) clearInterval(pollInterval);
-            pollInterval = setInterval(() => {
-                const isAdminOpen = document.getElementById('adminPanel').classList.contains('active');
-                const isChatOpen = document.getElementById('chatWidget').classList.contains('open');
-                if (isAdminOpen) {
-                    loadAdminUsers();
-                    if (selectedAdminUser) loadAdminConversation(selectedAdminUser);
-                }
-                if (isChatOpen) {
-                    loadChatMessages();
-                }
-            }, 5000); // refresh every 5 seconds
+        function openKillPassword() {
+            document.getElementById('killPasswordOverlay').classList.add('active');
+            document.getElementById('killPasswordInput').value = '';
+            document.getElementById('killPasswordError').textContent = '';
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => document.getElementById('killPasswordInput').focus(), 200);
         }
 
-        // Stop polling when not needed (optional)
-        function stopPolling() {
-            if (pollInterval) {
-                clearInterval(pollInterval);
-                pollInterval = null;
+        function closeKillPassword() {
+            document.getElementById('killPasswordOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function unlockKillPanel() {
+            const input = document.getElementById('killPasswordInput').value.trim();
+            const error = document.getElementById('killPasswordError');
+            if (input === KILL_PASSWORD) {
+                killPanelUnlocked = true;
+                closeKillPassword();
+                openKillPanel();
+            } else {
+                error.textContent = '❌ Incorrect password.';
+                document.getElementById('killPasswordInput').value = '';
+                document.getElementById('killPasswordInput').focus();
             }
+        }
+
+        function openKillPanel() {
+            if (!killPanelUnlocked) {
+                openKillPassword();
+                return;
+            }
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('adminPanel').classList.remove('active');
+            document.getElementById('killPanel').classList.add('active');
+            renderKillPanel();
+        }
+
+        function closeKillPanel() {
+            document.getElementById('home-view').style.display = 'block';
+            document.getElementById('killPanel').classList.remove('active');
+            window.location.hash = '';
+        }
+
+        // Handle Enter key on password input
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('killPasswordInput').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') unlockKillPanel();
+            });
+        });
+
+        // ---- KILL DATA ----
+        let killedIds = new Set();
+
+        async function loadKilledState() {
+            try {
+                const data = await fetchBinData();
+                const list = data.killed_ids || [];
+                killedIds = new Set(list);
+            } catch (e) {
+                console.warn('loadKilledState error:', e);
+                killedIds = new Set();
+            }
+        }
+
+        async function saveKilledState() {
+            try {
+                const data = await fetchBinData();
+                await saveBinData({ ...data, killed_ids: Array.from(killedIds) });
+            } catch (e) {
+                console.warn('saveKilledState error:', e);
+            }
+        }
+
+        function isProductKilled(productId) {
+            return killedIds.has(String(productId));
+        }
+
+        async function toggleKill(productId) {
+            const idStr = String(productId);
+            if (killedIds.has(idStr)) {
+                killedIds.delete(idStr);
+            } else {
+                killedIds.add(idStr);
+            }
+            await saveKilledState();
+            // Re-render both catalog and kill panel
+            renderCatalog();
+            renderKillPanel();
+            // Also update admin panel if open
+            if (document.getElementById('adminPanel').classList.contains('active')) {
+                loadAdminUsers();
+                if (selectedAdminUser) loadAdminConversation(selectedAdminUser);
+            }
+        }
+
+        // ---- Render Kill Panel ----
+        function renderKillPanel() {
+            const container = document.getElementById('killPanelGrid');
+            if (!container) return;
+
+            // Use the same PRODUCT_DATASET (defined later)
+            const allProducts = PRODUCT_DATASET || [];
+
+            if (allProducts.length === 0) {
+                container.innerHTML = `<div style="padding:40px;text-align:center;color:var(--color-text-muted);">No products found.</div>`;
+                return;
+            }
+
+            container.innerHTML = allProducts.map(p => {
+                const killed = isProductKilled(p.id);
+                const statusClass = killed ? 'dead' : 'alive';
+                const statusLabel = killed ? '☠️ KILLED' : '✅ Live';
+                const btnHtml = killed ?
+                    `<button class="btn-unhide" onclick="toggleKill(${p.id})">↻ Unhide</button>` :
+                    `<button class="btn-kill" onclick="toggleKill(${p.id})">💀 Kill</button>`;
+                const extLabel = p.external ? '🔗 External' : '📦 Product';
+                return `
+                    <div class="kill-item ${killed ? 'killed' : ''}">
+                        <img src="${p.image}" class="kill-item__image" alt="${p.title}" />
+                        <div class="kill-item__info">
+                            <div class="title">${p.title}</div>
+                            <div class="sub">${extLabel} · ID: ${p.id}</div>
+                            <span class="status-badge ${statusClass}">${statusLabel}</span>
+                        </div>
+                        <div class="kill-item__action">${btnHtml}</div>
+                    </div>
+                `;
+            }).join('');
         }
 
         // ============================================================
@@ -2102,7 +2453,7 @@
             { name: "Cryptocurrency (Bitcoin)", color: "#F7931A",
                 icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 8h4a3 3 0 0 1 0 6H9zM9 14h5a3 3 0 0 1 0 6H9zM11 4v4M15 4v4M11 20v-2M15 20v-2M6 8h3M6 14h3"/></svg>` },
             { name: "Gift cards", color: "#ff4d4f",
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M12 8v12M8 8s-1-4-4-4 4 4 4 4zm8 0s1-4 4-4-4 4-4 4z"/></svg>` },
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M12 8v8M8 8s-1-4-4-4 4 4 4 4zm8 0s1-4 4-4-4 4-4 4z"/></svg>` },
             { name: "USDT/Binance Pay", color: "#FCD535",
                 icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l10 10-10 10L2 12 12 2zM12 8v8M8 12h8"/></svg>` }
         ];
@@ -2333,11 +2684,22 @@
         }
 
         // ============================================================
-        //  CATALOG RENDER
+        //  CATALOG RENDER (with kill filter)
         // ============================================================
         function renderCatalog() {
             const container = document.getElementById("products-catalog-wrapper");
-            container.innerHTML = PRODUCT_DATASET.map(product => {
+            if (!container) return;
+
+            // Filter out killed products
+            const visibleProducts = PRODUCT_DATASET.filter(p => !isProductKilled(p.id));
+
+            if (visibleProducts.length === 0) {
+                container.innerHTML =
+                `<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--color-text-muted);">No products available right now.</div>`;
+                return;
+            }
+
+            container.innerHTML = visibleProducts.map(product => {
                 const isExternal = product.external === true;
                 const isLastChina = product.id === 10;
 
@@ -2385,9 +2747,62 @@
         }
 
         // ============================================================
+        //  POLLING
+        // ============================================================
+        let pollInterval = null;
+
+        function startPolling() {
+            if (pollInterval) clearInterval(pollInterval);
+            pollInterval = setInterval(() => {
+                const isAdminOpen = document.getElementById('adminPanel').classList.contains('active');
+                const isChatOpen = document.getElementById('chatWidget').classList.contains('open');
+                const isKillOpen = document.getElementById('killPanel').classList.contains('active');
+                if (isAdminOpen) {
+                    loadAdminUsers();
+                    if (selectedAdminUser) loadAdminConversation(selectedAdminUser);
+                }
+                if (isChatOpen) {
+                    loadChatMessages();
+                }
+                if (isKillOpen && killPanelUnlocked) {
+                    // Re-render kill panel to reflect any changes from other sessions
+                    renderKillPanel();
+                }
+            }, 5000);
+        }
+
+        // ============================================================
+        //  HASH ROUTING
+        // ============================================================
+        function handleHashChange() {
+            const hash = window.location.hash;
+            if (hash === '#adminpanel') {
+                openAdminPanel();
+            } else if (hash === '#kill') {
+                openKillPanel();
+            } else {
+                // Close any open panels
+                if (document.getElementById('adminPanel').classList.contains('active')) {
+                    closeAdminPanel();
+                }
+                if (document.getElementById('killPanel').classList.contains('active')) {
+                    closeKillPanel();
+                }
+                if (document.getElementById('home-view').style.display === 'none') {
+                    document.getElementById('home-view').style.display = 'block';
+                }
+                // Also close kill password overlay
+                closeKillPassword();
+            }
+        }
+
+        // ============================================================
         //  INIT
         // ============================================================
-        document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", async () => {
+            // Load killed state first
+            await loadKilledState();
+
             const stored = getStoredUser();
             if (stored) {
                 currentUser = stored;
@@ -2416,9 +2831,8 @@
 
             document.getElementById("global-cart-counter").innerText = "0";
 
-            if (window.location.hash === '#adminpanel') {
-                openAdminPanel();
-            }
+            // Handle hash on load
+            handleHashChange();
 
             document.getElementById('chatInput').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') sendChatMessage();
@@ -2428,13 +2842,14 @@
                 if (e.key === 'Enter') sendAdminReply();
             });
 
-            // Start polling for real-time updates
+            // Hash change listener
+            window.addEventListener('hashchange', handleHashChange);
+
+            // Start polling
             startPolling();
 
-            // Also poll on visibility change to keep fresh
             document.addEventListener('visibilitychange', () => {
                 if (!document.hidden) {
-                    // refresh when tab becomes active
                     if (document.getElementById('adminPanel').classList.contains('active')) {
                         loadAdminUsers();
                         if (selectedAdminUser) loadAdminConversation(selectedAdminUser);
@@ -2442,9 +2857,12 @@
                     if (document.getElementById('chatWidget').classList.contains('open')) {
                         loadChatMessages();
                     }
+                    if (document.getElementById('killPanel').classList.contains('active') && killPanelUnlocked) {
+                        renderKillPanel();
+                    }
                 }
             });
         });
     </script>
 </body>
-    </html>
+                                                                         </html>
