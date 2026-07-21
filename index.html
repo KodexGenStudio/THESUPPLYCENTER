@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>The Supply Center — Premium Sourcing</title>
 
-    <!-- PWA manifest (generated inline) -->
-    <link id="pwa-manifest" rel="manifest" />
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
 
@@ -24,7 +21,6 @@
             --font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
             --radius: 16px;
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-            --drawer-width: 320px;
         }
 
         * {
@@ -229,157 +225,6 @@
             filter: drop-shadow(0 0 5px rgba(140, 43, 255, 0.6));
         }
 
-        /* ===== SIDE DRAWER (Hamburger Menu) ===== */
-        .drawer-overlay-slide {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 250;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.35s ease, visibility 0.35s ease;
-        }
-        .drawer-overlay-slide.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .drawer-slide {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: var(--drawer-width);
-            max-width: 85vw;
-            height: 100%;
-            background: #0d0d0d;
-            border-right: 1px solid var(--color-border);
-            z-index: 251;
-            transform: translateX(-100%);
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            padding: 28px 20px 40px;
-        }
-        .drawer-overlay-slide.active .drawer-slide {
-            transform: translateX(0);
-        }
-        .drawer-slide__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 32px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-        .drawer-slide__logo {
-            font-family: 'UnifrakturMaguntia', cursive;
-            font-size: 24px;
-            color: #8c2bff;
-            filter: drop-shadow(0 0 8px rgba(140, 43, 255, 0.4));
-        }
-        .drawer-slide__close {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            color: var(--color-text);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background 0.2s;
-        }
-        .drawer-slide__close:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .drawer-slide__section {
-            margin-bottom: 28px;
-        }
-        .drawer-slide__section-title {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--color-text-muted);
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .drawer-slide__item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 12px 14px;
-            border-radius: 12px;
-            background: transparent;
-            border: 1px solid transparent;
-            color: var(--color-text);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-bottom: 4px;
-            width: 100%;
-            text-align: left;
-        }
-        .drawer-slide__item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.08);
-        }
-        .drawer-slide__item .icon {
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 18px;
-        }
-        .drawer-slide__item .badge {
-            margin-left: auto;
-            background: var(--color-accent);
-            color: #fff;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 2px 10px;
-            border-radius: 20px;
-        }
-
-        /* Install button special */
-        .drawer-slide__item--install {
-            background: rgba(127, 40, 255, 0.12);
-            border-color: rgba(127, 40, 255, 0.25);
-            margin-top: 8px;
-        }
-        .drawer-slide__item--install:hover {
-            background: rgba(127, 40, 255, 0.2);
-            border-color: rgba(127, 40, 255, 0.4);
-        }
-        .drawer-slide__item--install .icon {
-            color: var(--color-accent);
-        }
-
-        .drawer-slide__footer {
-            margin-top: auto;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            font-size: 12px;
-            color: var(--color-text-muted);
-        }
-        .drawer-slide__footer span {
-            display: block;
-            margin-top: 4px;
-        }
-
-        /* ===== REST OF APP (unchanged from original) ===== */
         .ai-product-grid {
             width: 100%;
             padding: 64px 20px 32px;
@@ -544,6 +389,7 @@
             flex-shrink: 0;
         }
 
+        /* Reviews */
         .customer-reviews-section {
             padding: 40px 20px 60px;
             background-color: #050505;
@@ -702,6 +548,7 @@
             background: rgba(127, 40, 255, 0.2);
         }
 
+        /* Drawer / Cart / Payment */
         .drawer-overlay {
             position: fixed;
             top: 0;
@@ -881,6 +728,7 @@
             gap: 12px;
         }
 
+        /* Auth Modal */
         .auth-modal-overlay {
             position: fixed;
             top: 0;
@@ -1025,6 +873,7 @@
             min-height: 20px;
         }
 
+        /* ===== CHAT WIDGET (user side — PRIVATE) ===== */
         .chat-widget-overlay {
             position: fixed;
             bottom: 90px;
@@ -1197,6 +1046,7 @@
             font-size: 14px;
         }
 
+        /* ===== ADMIN PANEL (WhatsApp-style) ===== */
         .admin-panel {
             display: none;
             padding: 0;
@@ -1395,6 +1245,7 @@
             text-align: center;
         }
 
+        /* ===== KILL PANEL ===== */
         .kill-panel {
             display: none;
             padding: 20px;
@@ -1521,6 +1372,7 @@
             background: #1ebe5c;
         }
 
+        /* ===== PASSWORD MODAL FOR KILL PANEL ===== */
         .kill-password-overlay {
             position: fixed;
             top: 0;
@@ -1605,27 +1457,6 @@
         }
         .kill-password-box .btn-row .btn-unlock:hover {
             background: var(--color-accent-hover);
-        }
-
-        /* Toast */
-        .toast-msg {
-            position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(20, 20, 20, 0.95);
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            font-size: 14px;
-            font-weight: 600;
-            z-index: 999;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-            max-width: 90%;
-            text-align: center;
-            transition: opacity 0.3s;
         }
 
         /* Responsive */
@@ -1714,10 +1545,6 @@
             .kill-panel__grid {
                 grid-template-columns: 1fr;
             }
-            .drawer-slide {
-                width: 85vw;
-                padding: 20px 16px 30px;
-            }
         }
         @media (max-width: 430px) {
             .header-minimal__icon--auth {
@@ -1762,8 +1589,7 @@
     <!-- HEADER -->
     <header class="header-minimal">
         <div class="header-minimal__pill">
-            <!-- Hamburger menu button -->
-            <button class="header-minimal__icon" id="menuToggleBtn" aria-label="Menu" style="background:transparent; border:none; font-size:20px;">
+            <button class="header-minimal__icon" style="background:transparent; border:none; font-size:20px;" aria-label="Menu">
                 <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M3 12h18M3 6h18M3 18h18" />
                 </svg>
@@ -1784,49 +1610,6 @@
             </div>
         </div>
     </header>
-
-    <!-- ===== SIDE DRAWER (Hamburger Menu) ===== -->
-    <div class="drawer-overlay-slide" id="drawerOverlay" onclick="closeDrawer()">
-        <div class="drawer-slide" onclick="event.stopPropagation()">
-            <div class="drawer-slide__header">
-                <span class="drawer-slide__logo">The Supply Center</span>
-                <button class="drawer-slide__close" onclick="closeDrawer()">✕</button>
-            </div>
-
-            <div class="drawer-slide__section">
-                <div class="drawer-slide__section-title">Menu</div>
-                <a href="#" class="drawer-slide__item" onclick="closeDrawer();">
-                    <span class="icon">🏠</span> Home
-                </a>
-                <a href="#adminpanel" class="drawer-slide__item" onclick="closeDrawer();">
-                    <span class="icon">💬</span> Admin Chat
-                    <span class="badge">Staff</span>
-                </a>
-                <a href="#kill" class="drawer-slide__item" onclick="closeDrawer();">
-                    <span class="icon">☠️</span> Kill Panel
-                    <span class="badge">Admin</span>
-                </a>
-            </div>
-
-            <div class="drawer-slide__section">
-                <div class="drawer-slide__section-title">App</div>
-                <!-- INSTALL BUTTON -->
-                <button class="drawer-slide__item drawer-slide__item--install" id="installAppBtn" onclick="triggerInstall()">
-                    <span class="icon">📲</span> Install App
-                    <span class="badge" style="background:#25d366;color:#000;">PWA</span>
-                </button>
-                <button class="drawer-slide__item" onclick="toggleChatWidget(); closeDrawer();">
-                    <span class="icon">💬</span> Live Chat
-                    <span class="badge" style="background:#25d366;color:#000;">Online</span>
-                </button>
-            </div>
-
-            <div class="drawer-slide__footer">
-                <span>v2.0 • The Supply Center</span>
-                <span style="font-size:11px;color:var(--color-text-muted);">Premium sourcing network</span>
-            </div>
-        </div>
-    </div>
 
     <!-- AUTH MODAL -->
     <div class="auth-modal-overlay" id="authModal" onclick="handleAuthOutsideClick(event)">
@@ -1863,7 +1646,7 @@
         </div>
     </div>
 
-    <!-- CHAT WIDGET -->
+    <!-- ===== CHAT WIDGET (user side — PRIVATE) ===== -->
     <div class="chat-widget-overlay" id="chatWidget">
         <div class="chat-widget-header">
             <h4>
@@ -1881,7 +1664,7 @@
         </div>
     </div>
 
-    <!-- KILL PASSWORD OVERLAY -->
+    <!-- ===== KILL PASSWORD OVERLAY ===== -->
     <div class="kill-password-overlay" id="killPasswordOverlay">
         <div class="kill-password-box">
             <h3>🔐 Kill Panel</h3>
@@ -1895,18 +1678,20 @@
         </div>
     </div>
 
-    <!-- KILL PANEL -->
+    <!-- ===== KILL PANEL ===== -->
     <div class="kill-panel" id="killPanel">
         <div class="kill-panel__container">
             <div class="kill-panel__header">
                 <h2>☠️ Kill Panel <span style="font-size:14px;font-weight:400;color:var(--color-text-muted);">manage product visibility</span></h2>
                 <a href="#" class="back-link" onclick="closeKillPanel()">← Back to Store</a>
             </div>
-            <div class="kill-panel__grid" id="killPanelGrid"></div>
+            <div class="kill-panel__grid" id="killPanelGrid">
+                <!-- populated by JS -->
+            </div>
         </div>
     </div>
 
-    <!-- HOME VIEW -->
+    <!-- MAIN VIEW -->
     <div id="home-view">
         <main class="ai-product-grid">
             <div class="ai-product-grid__container">
@@ -1943,9 +1728,10 @@
         </section>
     </div>
 
-    <!-- ADMIN PANEL -->
+    <!-- ===== ADMIN PANEL (WhatsApp-style) ===== -->
     <div class="admin-panel" id="adminPanel">
         <div class="admin-panel__container" id="adminContainer">
+            <!-- Sidebar: user list -->
             <div class="admin-panel__sidebar" id="adminSidebar">
                 <div class="admin-panel__sidebar-header">
                     <span>💬 Chats</span>
@@ -1955,6 +1741,8 @@
                     <div style="padding:20px;color:var(--color-text-muted);">Loading users...</div>
                 </div>
             </div>
+
+            <!-- Chat area -->
             <div class="admin-panel__chat-area" id="adminChatArea">
                 <div class="admin-panel__chat-header">
                     <button class="back-btn" id="adminChatBackBtn" onclick="adminGoBack()">←</button>
@@ -1974,211 +1762,12 @@
         </div>
     </div>
 
-    <!-- CHECKOUT DRAWER -->
+    <!-- DRAWER -->
     <div class="drawer-overlay" id="interactive-checkout-drawer" onclick="handleOutsideClick(event)">
         <div class="drawer-container" id="drawer-container-body"></div>
     </div>
 
     <script>
-        // ============================================================
-        //  PWA SETUP — Manifest + Service Worker + Install Prompt
-        // ============================================================
-
-        // --- 1. Generate manifest dynamically ---
-        (function generateManifest() {
-            const icons = [
-                { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%237f28ff'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ESC%3C/text%3E%3C/svg%3E",
-                    sizes: "512x512", type: "image/svg+xml" },
-                { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%237f28ff'/%3E%3Ctext x='96' y='130' font-size='100' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ESC%3C/text%3E%3C/svg%3E",
-                    sizes: "192x192", type: "image/svg+xml" }
-            ];
-
-            const manifest = {
-                name: "The Supply Center",
-                short_name: "Supply Center",
-                description: "Premium sourcing network for vendors and resellers.",
-                start_url: "/",
-                display: "standalone",
-                orientation: "portrait",
-                background_color: "#000000",
-                theme_color: "#7f28ff",
-                icons: icons,
-                categories: ["shopping", "business"],
-                lang: "en",
-                scope: "/"
-            };
-
-            const json = JSON.stringify(manifest);
-            const blob = new Blob([json], { type: "application/json" });
-            const url = URL.createObjectURL(blob);
-            document.getElementById("pwa-manifest").href = url;
-        })();
-
-        // --- 2. Service Worker ---
-        (function registerServiceWorker() {
-            const swCode = `
-        self.addEventListener('install', (e) => {
-          e.waitUntil(
-            caches.open('tsc-cache-v1').then((cache) => {
-              return cache.addAll([
-                '/',
-                'index.html'
-              ]);
-            })
-          );
-          self.skipWaiting();
-        });
-
-        self.addEventListener('activate', (e) => {
-          e.waitUntil(clients.claim());
-        });
-
-        self.addEventListener('fetch', (e) => {
-          e.respondWith(
-            caches.match(e.request).then((res) => {
-              return res || fetch(e.request);
-            })
-          );
-        });
-      `;
-
-            try {
-                const blob = new Blob([swCode], { type: "application/javascript" });
-                const swUrl = URL.createObjectURL(blob);
-                if ('serviceWorker' in navigator) {
-                    navigator.serviceWorker.register(swUrl, { scope: '/' })
-                        .then(() => console.log('🔵 SW registered'))
-                        .catch(err => console.warn('SW reg error:', err));
-                }
-            } catch (e) {
-                console.warn('SW init error:', e);
-            }
-        })();
-
-        // --- 3. beforeinstallprompt handling ---
-        let deferredPrompt = null;
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            console.log('🔵 beforeinstallprompt captured');
-            // Show install button in drawer
-            const installBtn = document.getElementById('installAppBtn');
-            if (installBtn) {
-                installBtn.style.display = 'flex';
-                installBtn.innerHTML = `
-              <span class="icon">📲</span> Install App
-              <span class="badge" style="background:#25d366;color:#000;">Available</span>
-            `;
-            }
-        });
-
-        window.addEventListener('appinstalled', () => {
-            console.log('✅ App installed!');
-            showToast('🎉 The Supply Center installed successfully!');
-            const installBtn = document.getElementById('installAppBtn');
-            if (installBtn) {
-                installBtn.innerHTML = `
-              <span class="icon">✅</span> Installed
-              <span class="badge" style="background:#25d366;color:#000;">Done</span>
-            `;
-                installBtn.style.opacity = '0.6';
-                installBtn.style.pointerEvents = 'none';
-            }
-        });
-
-        // --- 4. Trigger install ---
-        function triggerInstall() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choice) => {
-                    if (choice.outcome === 'accepted') {
-                        showToast('✅ Installing The Supply Center...');
-                    } else {
-                        showToast('Installation declined.');
-                    }
-                    deferredPrompt = null;
-                    const btn = document.getElementById('installAppBtn');
-                    if (btn) {
-                        btn.innerHTML = `
-                  <span class="icon">📲</span> Install App
-                  <span class="badge" style="background:#ff6b6b;color:#fff;">Try Again</span>
-                `;
-                    }
-                });
-            } else {
-                // Fallback: check if already installed or prompt not available
-                if (window.navigator.standalone === true) {
-                    showToast('✅ App is already installed!');
-                } else {
-                    showToast('📲 Open in Chrome/Edge and tap "Add to Home Screen"');
-                    // Also try to show a native fallback
-                    try {
-                        if ('share' in navigator) {
-                            navigator.share({
-                                title: 'The Supply Center',
-                                text: 'Check out The Supply Center — premium sourcing network!',
-                                url: window.location.href
-                            }).catch(() => {});
-                        }
-                    } catch (_) {}
-                }
-            }
-        }
-
-        // --- 5. Drawer controls ---
-        function openDrawer() {
-            document.getElementById('drawerOverlay').classList.add('active');
-            document.body.style.overflow = 'hidden';
-            // Update install button state
-            const btn = document.getElementById('installAppBtn');
-            if (btn && deferredPrompt) {
-                btn.style.display = 'flex';
-                btn.innerHTML = `
-              <span class="icon">📲</span> Install App
-              <span class="badge" style="background:#25d366;color:#000;">Available</span>
-            `;
-            } else if (btn && !deferredPrompt) {
-                btn.style.display = 'flex';
-                btn.innerHTML = `
-              <span class="icon">📲</span> Install App
-              <span class="badge" style="background:#ff6b6b;color:#fff;">Open Browser</span>
-            `;
-            }
-        }
-
-        function closeDrawer() {
-            document.getElementById('drawerOverlay').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Hook up the hamburger button
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuBtn = document.getElementById('menuToggleBtn');
-            if (menuBtn) {
-                menuBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    openDrawer();
-                });
-            }
-            // Close drawer on Escape
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeDrawer();
-            });
-        });
-
-        // Also close drawer when clicking a link inside it (except admin/kill which need navigation)
-        document.addEventListener('click', (e) => {
-            const drawer = document.querySelector('.drawer-slide');
-            if (drawer && drawer.contains(e.target)) {
-                const link = e.target.closest('a.drawer-slide__item, button.drawer-slide__item');
-                if (link && !link.id.includes('installAppBtn')) {
-                    // Allow hash links to work
-                    setTimeout(closeDrawer, 200);
-                }
-            }
-        });
-
         // ============================================================
         //  JSON BIN CONFIG
         // ============================================================
@@ -2286,7 +1875,7 @@
                 btn.style.background = 'rgba(127,40,255,0.2)';
                 btn.style.borderColor = 'rgba(127,40,255,0.4)';
                 btn.onclick = () => { if (confirm(`Log out ${currentUser.username}?`)) logoutUser(); };
-                if (label) label.style.display = 'none';
+                label.style.display = 'none';
             } else {
                 btn.innerHTML = `<span id="authBtnLabel">Login</span>`;
                 btn.style.background = 'rgba(127,40,255,0.15)';
@@ -2343,16 +1932,36 @@
             const div = document.createElement('div');
             div.className = 'toast-msg';
             div.textContent = msg;
+            Object.assign(div.style, {
+                position: 'fixed',
+                bottom: '80px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                background: 'rgba(20,20,20,0.95)',
+                color: '#fff',
+                padding: '12px 24px',
+                borderRadius: '40px',
+                border: '1px solid rgba(255,255,255,0.1)',
+                backdropFilter: 'blur(12px)',
+                fontSize: '14px',
+                fontWeight: '600',
+                zIndex: '999',
+                boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
+                maxWidth: '90%',
+                textAlign: 'center',
+                transition: 'opacity 0.3s'
+            });
             document.body.appendChild(div);
             setTimeout(() => { div.style.opacity = '0';
                 setTimeout(() => div.remove(), 400); }, 3000);
         }
 
         // ============================================================
-        //  CHAT SYSTEM
+        //  CHAT SYSTEM (vendor id=10) — PRIVATE per user
         // ============================================================
         const CHAT_VENDOR_ID = 10;
 
+        // ---- User chat widget - PRIVATE ----
         async function loadChatMessages() {
             const container = document.getElementById('chatMessagesContainer');
             if (!currentUser) {
@@ -2363,11 +1972,17 @@
                 const data = await fetchBinData();
                 const allMessages = data.chat_messages || [];
                 const vendorMessages = allMessages.filter(m => m.vendorId === CHAT_VENDOR_ID);
+
+                // Get messages from this user
                 const userMessages = vendorMessages.filter(m => m.phone === currentUser.phone && m.sender === 'user');
                 const userMsgIds = new Set(userMessages.map(m => m.id));
+
+                // Get admin replies to this user's messages
                 const adminReplies = vendorMessages.filter(m =>
                     m.sender === 'admin' && m.replyTo && userMsgIds.has(m.replyTo)
                 );
+
+                // Combine and sort
                 const allUserMessages = [...userMessages, ...adminReplies];
                 allUserMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
 
@@ -2375,14 +1990,15 @@
                     container.innerHTML = `<div class="chat-empty">No messages yet. Start a conversation!</div>`;
                     return;
                 }
+
                 container.innerHTML = allUserMessages.map(m => {
                     const isSelf = m.sender === 'user';
                     const isAdmin = m.sender === 'admin';
                     let senderLabel = isAdmin ? 'Admin' : 'You';
                     return `<div class="chat-message ${isSelf ? 'self' : ''} ${isAdmin ? 'admin' : ''}">
-                <div>${m.message}</div>
-                <div class="msg-meta"><span class="msg-sender-label">${senderLabel}</span> <span>${new Date(m.timestamp).toLocaleTimeString()}</span></div>
-              </div>`;
+                        <div>${m.message}</div>
+                        <div class="msg-meta"><span class="msg-sender-label">${senderLabel}</span> <span>${new Date(m.timestamp).toLocaleTimeString()}</span></div>
+                    </div>`;
                 }).join('');
                 container.scrollTop = container.scrollHeight;
             } catch (e) {
@@ -2430,6 +2046,7 @@
             if (widget.classList.contains('open')) loadChatMessages();
         }
 
+        // ---- Admin chat ----
         let selectedAdminUser = null;
 
         async function loadAdminUsers() {
@@ -2464,15 +2081,15 @@
                     return;
                 }
                 container.innerHTML = users.map(u => `
-              <div class="admin-user-item ${selectedAdminUser === u.phone ? 'active' : ''}" data-phone="${u.phone}" onclick="selectAdminUser('${u.phone}')">
-                <div class="avatar">${u.username.charAt(0).toUpperCase()}</div>
-                <div class="user-info">
-                  <div class="name">${u.username}</div>
-                  <div class="phone">${u.phone}</div>
-                  <div class="last-msg">${u.lastMsg}</div>
-                </div>
-              </div>
-            `).join('');
+                    <div class="admin-user-item ${selectedAdminUser === u.phone ? 'active' : ''}" data-phone="${u.phone}" onclick="selectAdminUser('${u.phone}')">
+                        <div class="avatar">${u.username.charAt(0).toUpperCase()}</div>
+                        <div class="user-info">
+                            <div class="name">${u.username}</div>
+                            <div class="phone">${u.phone}</div>
+                            <div class="last-msg">${u.lastMsg}</div>
+                        </div>
+                    </div>
+                `).join('');
             } catch (e) {
                 container.innerHTML = `<div style="padding:20px;color:var(--color-text-muted);">Error loading users.</div>`;
             }
@@ -2499,11 +2116,16 @@
                 const data = await fetchBinData();
                 const messages = data.chat_messages || [];
                 const vendorMessages = messages.filter(m => m.vendorId === CHAT_VENDOR_ID);
+
+                // Get user's messages
                 const userMsgs = vendorMessages.filter(m => m.phone === phone && m.sender === 'user');
                 const userMsgIds = new Set(userMsgs.map(m => m.id));
+
+                // Get admin replies to this user
                 const adminReplies = vendorMessages.filter(m =>
                     m.sender === 'admin' && m.replyTo && userMsgIds.has(m.replyTo)
                 );
+
                 const allMsgs = [...userMsgs, ...adminReplies];
                 allMsgs.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
 
@@ -2521,9 +2143,9 @@
                     const isAdmin = m.sender === 'admin';
                     const senderLabel = isAdmin ? 'Admin' : (m.username || 'User');
                     return `<div class="chat-message ${isSelf ? 'self' : ''} ${isAdmin ? 'admin' : ''}">
-                <div>${m.message}</div>
-                <div class="msg-meta"><span class="msg-sender-label">${senderLabel}</span> <span>${new Date(m.timestamp).toLocaleTimeString()}</span></div>
-              </div>`;
+                        <div>${m.message}</div>
+                        <div class="msg-meta"><span class="msg-sender-label">${senderLabel}</span> <span>${new Date(m.timestamp).toLocaleTimeString()}</span></div>
+                    </div>`;
                 }).join('');
                 container.scrollTop = container.scrollHeight;
                 document.getElementById('adminInputArea').style.display = 'flex';
@@ -2647,12 +2269,14 @@
             window.location.hash = '';
         }
 
+        // Handle Enter key on password input
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('killPasswordInput').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') unlockKillPanel();
             });
         });
 
+        // ---- KILL DATA ----
         let killedIds = new Set();
 
         async function loadKilledState() {
@@ -2687,23 +2311,29 @@
                 killedIds.add(idStr);
             }
             await saveKilledState();
+            // Re-render both catalog and kill panel
             renderCatalog();
             renderKillPanel();
+            // Also update admin panel if open
             if (document.getElementById('adminPanel').classList.contains('active')) {
                 loadAdminUsers();
                 if (selectedAdminUser) loadAdminConversation(selectedAdminUser);
             }
         }
 
+        // ---- Render Kill Panel ----
         function renderKillPanel() {
             const container = document.getElementById('killPanelGrid');
             if (!container) return;
+
+            // Use the same PRODUCT_DATASET (defined later)
             const allProducts = PRODUCT_DATASET || [];
+
             if (allProducts.length === 0) {
-                container.innerHTML =
-                    `<div style="padding:40px;text-align:center;color:var(--color-text-muted);">No products found.</div>`;
+                container.innerHTML = `<div style="padding:40px;text-align:center;color:var(--color-text-muted);">No products found.</div>`;
                 return;
             }
+
             container.innerHTML = allProducts.map(p => {
                 const killed = isProductKilled(p.id);
                 const statusClass = killed ? 'dead' : 'alive';
@@ -2713,16 +2343,16 @@
                     `<button class="btn-kill" onclick="toggleKill(${p.id})">💀 Kill</button>`;
                 const extLabel = p.external ? '🔗 External' : '📦 Product';
                 return `
-              <div class="kill-item ${killed ? 'killed' : ''}">
-                <img src="${p.image}" class="kill-item__image" alt="${p.title}" />
-                <div class="kill-item__info">
-                  <div class="title">${p.title}</div>
-                  <div class="sub">${extLabel} · ID: ${p.id}</div>
-                  <span class="status-badge ${statusClass}">${statusLabel}</span>
-                </div>
-                <div class="kill-item__action">${btnHtml}</div>
-              </div>
-            `;
+                    <div class="kill-item ${killed ? 'killed' : ''}">
+                        <img src="${p.image}" class="kill-item__image" alt="${p.title}" />
+                        <div class="kill-item__info">
+                            <div class="title">${p.title}</div>
+                            <div class="sub">${extLabel} · ID: ${p.id}</div>
+                            <span class="status-badge ${statusClass}">${statusLabel}</span>
+                        </div>
+                        <div class="kill-item__action">${btnHtml}</div>
+                    </div>
+                `;
             }).join('');
         }
 
@@ -3054,28 +2684,35 @@
         }
 
         // ============================================================
-        //  CATALOG RENDER
+        //  CATALOG RENDER (with kill filter)
         // ============================================================
         function renderCatalog() {
             const container = document.getElementById("products-catalog-wrapper");
             if (!container) return;
+
+            // Filter out killed products
             const visibleProducts = PRODUCT_DATASET.filter(p => !isProductKilled(p.id));
+
             if (visibleProducts.length === 0) {
                 container.innerHTML =
-                    `<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--color-text-muted);">No products available right now.</div>`;
+                `<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--color-text-muted);">No products available right now.</div>`;
                 return;
             }
+
             container.innerHTML = visibleProducts.map(product => {
                 const isExternal = product.external === true;
                 const isLastChina = product.id === 10;
+
                 const priceHtml = isExternal ?
                     `<div class="ai-product-card__price">${product.price}</div>` :
                     `<div class="ai-product-card__price">$${product.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>`;
+
                 const buttonClass = isExternal ? "ai-product-card__button ai-product-card__button--external" :
                     "ai-product-card__button";
                 const buttonAction = isExternal ? `redirectToExternal('${product.externalLink}')` :
                     `openProductDrawer(${product.id})`;
                 const buttonText = isExternal ? "Visit Website →" : "View product";
+
                 let chatButtonHtml = '';
                 if (isLastChina) {
                     chatButtonHtml = `
@@ -3087,12 +2724,14 @@
                 </button>
               `;
                 }
+
                 const actionsHtml = `
               <div class="ai-product-card__actions">
                 <button class="${buttonClass}" onclick="${buttonAction}">${buttonText}</button>
                 ${chatButtonHtml}
               </div>
             `;
+
                 return `<div class="ai-product-card">
               <div class="ai-product-card__image-wrapper">
                 <img src="${product.image}" class="ai-product-card__image" loading="lazy" alt="${product.title}" />
@@ -3108,7 +2747,7 @@
         }
 
         // ============================================================
-        //  POLLING & HASH ROUTING
+        //  POLLING
         // ============================================================
         let pollInterval = null;
 
@@ -3122,11 +2761,19 @@
                     loadAdminUsers();
                     if (selectedAdminUser) loadAdminConversation(selectedAdminUser);
                 }
-                if (isChatOpen) loadChatMessages();
-                if (isKillOpen && killPanelUnlocked) renderKillPanel();
+                if (isChatOpen) {
+                    loadChatMessages();
+                }
+                if (isKillOpen && killPanelUnlocked) {
+                    // Re-render kill panel to reflect any changes from other sessions
+                    renderKillPanel();
+                }
             }, 5000);
         }
 
+        // ============================================================
+        //  HASH ROUTING
+        // ============================================================
         function handleHashChange() {
             const hash = window.location.hash;
             if (hash === '#adminpanel') {
@@ -3134,11 +2781,17 @@
             } else if (hash === '#kill') {
                 openKillPanel();
             } else {
-                if (document.getElementById('adminPanel').classList.contains('active')) closeAdminPanel();
-                if (document.getElementById('killPanel').classList.contains('active')) closeKillPanel();
+                // Close any open panels
+                if (document.getElementById('adminPanel').classList.contains('active')) {
+                    closeAdminPanel();
+                }
+                if (document.getElementById('killPanel').classList.contains('active')) {
+                    closeKillPanel();
+                }
                 if (document.getElementById('home-view').style.display === 'none') {
                     document.getElementById('home-view').style.display = 'block';
                 }
+                // Also close kill password overlay
                 closeKillPassword();
             }
         }
@@ -3147,9 +2800,13 @@
         //  INIT
         // ============================================================
         document.addEventListener("DOMContentLoaded", async () => {
+            // Load killed state first
             await loadKilledState();
+
             const stored = getStoredUser();
-            if (stored) currentUser = stored;
+            if (stored) {
+                currentUser = stored;
+            }
             updateAuthUI();
             renderCatalog();
             renderReviews();
@@ -3173,16 +2830,22 @@
             }
 
             document.getElementById("global-cart-counter").innerText = "0";
+
+            // Handle hash on load
             handleHashChange();
 
             document.getElementById('chatInput').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') sendChatMessage();
             });
+
             document.getElementById('adminReplyInput').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') sendAdminReply();
             });
 
+            // Hash change listener
             window.addEventListener('hashchange', handleHashChange);
+
+            // Start polling
             startPolling();
 
             document.addEventListener('visibilitychange', () => {
@@ -3191,28 +2854,15 @@
                         loadAdminUsers();
                         if (selectedAdminUser) loadAdminConversation(selectedAdminUser);
                     }
-                    if (document.getElementById('chatWidget').classList.contains('open')) loadChatMessages();
-                    if (document.getElementById('killPanel').classList.contains('active') && killPanelUnlocked)
+                    if (document.getElementById('chatWidget').classList.contains('open')) {
+                        loadChatMessages();
+                    }
+                    if (document.getElementById('killPanel').classList.contains('active') && killPanelUnlocked) {
                         renderKillPanel();
+                    }
                 }
             });
-
-            // Handle install button visibility
-            const installBtn = document.getElementById('installAppBtn');
-            if (installBtn && deferredPrompt) {
-                installBtn.style.display = 'flex';
-                installBtn.innerHTML = `
-              <span class="icon">📲</span> Install App
-              <span class="badge" style="background:#25d366;color:#000;">Available</span>
-            `;
-            } else if (installBtn) {
-                installBtn.style.display = 'flex';
-                installBtn.innerHTML = `
-              <span class="icon">📲</span> Install App
-              <span class="badge" style="background:#ff6b6b;color:#fff;">Open Browser</span>
-            `;
-            }
         });
     </script>
 </body>
-    </html>
+                                                                         </html>
