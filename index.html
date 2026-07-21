@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>The Supply Center — Premium Sourcing</title>
 
+    <!-- PWA Manifest (data URI) -->
+    <link rel="manifest" id="pwa-manifest" />
+
+    <!-- Theme color for PWA -->
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
 
@@ -225,6 +233,229 @@
             filter: drop-shadow(0 0 5px rgba(140, 43, 255, 0.6));
         }
 
+        /* ===== SIDE DRAWER / SLIDER ===== */
+        .drawer-overlay-side {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.35s ease;
+        }
+        .drawer-overlay-side.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .side-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 340px;
+            max-width: 85vw;
+            height: 100%;
+            background: #0d0d0d;
+            border-right: 1px solid var(--color-border);
+            z-index: 501;
+            transform: translateX(-100%);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 24px 20px;
+        }
+        .drawer-overlay-side.active .side-drawer {
+            transform: translateX(0);
+        }
+
+        .side-drawer__close {
+            align-self: flex-end;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.2s;
+            flex-shrink: 0;
+            margin-bottom: 20px;
+        }
+        .side-drawer__close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .side-drawer__brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 16px 0 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 24px;
+        }
+        .side-drawer__logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 24px;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 8px;
+            margin-bottom: 12px;
+        }
+        .side-drawer__brand h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .side-drawer__brand p {
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        .side-drawer__install-section {
+            background: rgba(127, 40, 255, 0.06);
+            border: 1px solid rgba(127, 40, 255, 0.2);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        .side-drawer__install-section.hidden {
+            display: none;
+        }
+        .side-drawer__install-section .install-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .side-drawer__install-section .install-header svg {
+            flex-shrink: 0;
+            color: var(--color-accent);
+        }
+        .side-drawer__install-section .install-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .side-drawer__install-section .install-desc {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .side-drawer__install-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: var(--color-accent);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .side-drawer__install-btn:hover {
+            background: var(--color-accent-hover);
+            transform: scale(1.02);
+        }
+        .side-drawer__install-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .side-drawer__install-btn .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .side-drawer__install-btn.loading .spinner {
+            display: inline-block;
+        }
+        .side-drawer__install-btn.loading .btn-text {
+            display: none;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .side-drawer__install-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(37, 211, 102, 0.12);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            border-radius: 40px;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #25d366;
+            margin-top: 10px;
+        }
+
+        .side-drawer__nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .side-drawer__nav-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+        .side-drawer__nav-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .side-drawer__nav-item svg {
+            flex-shrink: 0;
+            opacity: 0.7;
+        }
+        .side-drawer__nav-item .badge {
+            margin-left: auto;
+            background: var(--color-accent);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+
+        /* ===== AI PRODUCT GRID ===== */
         .ai-product-grid {
             width: 100%;
             padding: 64px 20px 32px;
@@ -1459,6 +1690,27 @@
             background: var(--color-accent-hover);
         }
 
+        /* Toast */
+        .toast-msg {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20, 20, 20, 0.95);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 999;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            max-width: 90%;
+            text-align: center;
+            transition: opacity 0.3s;
+        }
+
         /* Responsive */
         @media (max-width: 989px) {
             .ai-product-grid__grid {
@@ -1545,6 +1797,15 @@
             .kill-panel__grid {
                 grid-template-columns: 1fr;
             }
+            .side-drawer {
+                width: 300px;
+                max-width: 82vw;
+                padding: 20px 16px;
+            }
+            .side-drawer__logo {
+                width: 80px;
+                height: 80px;
+            }
         }
         @media (max-width: 430px) {
             .header-minimal__icon--auth {
@@ -1559,6 +1820,11 @@
             }
             .header-minimal__logo-text {
                 font-size: 15px;
+            }
+            .side-drawer {
+                width: 280px;
+                max-width: 80vw;
+                padding: 16px 14px;
             }
         }
     </style>
@@ -1589,7 +1855,8 @@
     <!-- HEADER -->
     <header class="header-minimal">
         <div class="header-minimal__pill">
-            <button class="header-minimal__icon" style="background:transparent; border:none; font-size:20px;" aria-label="Menu">
+            <!-- HAMBURGER MENU (3 lines) → opens side drawer -->
+            <button class="header-minimal__icon" id="menuToggleBtn" style="background:transparent; border:none; font-size:20px;" aria-label="Menu">
                 <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M3 12h18M3 6h18M3 18h18" />
                 </svg>
@@ -1610,6 +1877,82 @@
             </div>
         </div>
     </header>
+
+    <!-- ===== SIDE DRAWER (SLIDER) ===== -->
+    <div class="drawer-overlay-side" id="sideDrawerOverlay" onclick="handleSideDrawerOutside(event)">
+        <div class="side-drawer" id="sideDrawer">
+            <!-- Close button -->
+            <button class="side-drawer__close" onclick="closeSideDrawer()">✕</button>
+
+            <!-- Brand -->
+            <div class="side-drawer__brand">
+                <img src="https://raw.githubusercontent.com/KodexGenStudio/THESUPPLYCENTER/refs/heads/main/Logo.png" alt="The Supply Center" class="side-drawer__logo" />
+                <h2>The Supply Center</h2>
+                <p>Premium Sourcing Network</p>
+            </div>
+
+            <!-- Install App Section -->
+            <div class="side-drawer__install-section" id="installSection">
+                <div class="install-header">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v8M8 6l4-4 4 4" />
+                        <path d="M21 12v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8" />
+                        <path d="M7 16h10" />
+                    </svg>
+                    <h3>Install App</h3>
+                </div>
+                <p class="install-desc">
+                    Get the best experience with our dedicated app. Fast, secure, and always up to date.
+                </p>
+                <button class="side-drawer__install-btn" id="installAppBtn" onclick="triggerInstall()">
+                    <span class="spinner"></span>
+                    <span class="btn-text">📲 Install App</span>
+                </button>
+                <div style="margin-top:12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                    <span style="font-size:12px; color:var(--color-text-muted);">✓ Secure</span>
+                    <span style="font-size:12px; color:var(--color-text-muted);">✓ Fast</span>
+                    <span style="font-size:12px; color:var(--color-text-muted);">✓ Offline-ready</span>
+                </div>
+                <!-- Installed badge (hidden by default) -->
+                <div class="side-drawer__install-badge" id="installedBadge" style="display:none;">
+                    ✅ App installed
+                </div>
+            </div>
+
+            <!-- Nav items -->
+            <div class="side-drawer__nav">
+                <div class="side-drawer__nav-item" onclick="closeSideDrawer();">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12h12M3 12l4-4M3 12l4 4" />
+                        <path d="M21 3v18" />
+                    </svg>
+                    Home
+                </div>
+                <div class="side-drawer__nav-item" onclick="closeSideDrawer(); document.getElementById('authToggleBtn').click();">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    Account
+                </div>
+                <div class="side-drawer__nav-item" onclick="closeSideDrawer(); openCartView();">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1" />
+                        <circle cx="20" cy="21" r="1" />
+                        <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" />
+                    </svg>
+                    Cart
+                    <span class="badge" id="sideCartBadge">0</span>
+                </div>
+                <div class="side-drawer__nav-item" onclick="closeSideDrawer(); toggleChatWidget(true);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                    </svg>
+                    Chat Support
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- AUTH MODAL -->
     <div class="auth-modal-overlay" id="authModal" onclick="handleAuthOutsideClick(event)">
@@ -1768,6 +2111,191 @@
     </div>
 
     <script>
+        // ============================================================
+        //  PWA INSTALL HANDLING
+        // ============================================================
+
+        let deferredPrompt = null;
+        let isAppInstalled = false;
+
+        // Detect if app is already installed (standalone mode)
+        function checkIfInstalled() {
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                isAppInstalled = true;
+                updateInstallUI();
+                return true;
+            }
+            // iOS Safari check
+            if (window.navigator.standalone === true) {
+                isAppInstalled = true;
+                updateInstallUI();
+                return true;
+            }
+            return false;
+        }
+
+        function updateInstallUI() {
+            const installSection = document.getElementById('installSection');
+            const installBtn = document.getElementById('installAppBtn');
+            const installedBadge = document.getElementById('installedBadge');
+
+            if (isAppInstalled || checkIfInstalled()) {
+                // Hide install button, show installed badge
+                if (installBtn) installBtn.style.display = 'none';
+                if (installedBadge) installedBadge.style.display = 'inline-flex';
+                // Keep section visible but with different content
+                const desc = installSection.querySelector('.install-desc');
+                if (desc) desc.textContent = 'The app is already installed on your device. Enjoy the full experience!';
+                const headerIcon = installSection.querySelector('.install-header svg');
+                if (headerIcon) {
+                    headerIcon.innerHTML =
+                        '<path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>';
+                }
+                const headerTitle = installSection.querySelector('.install-header h3');
+                if (headerTitle) headerTitle.textContent = 'App Installed ✅';
+                // Remove the install button container or hide it
+                const btnWrapper = installSection.querySelector('.side-drawer__install-btn');
+                if (btnWrapper) btnWrapper.style.display = 'none';
+            } else {
+                // Show install button
+                const btn = document.getElementById('installAppBtn');
+                if (btn) btn.style.display = 'flex';
+                const badge = document.getElementById('installedBadge');
+                if (badge) badge.style.display = 'none';
+                // Reset text
+                const desc = installSection?.querySelector('.install-desc');
+                if (desc) desc.textContent = 'Get the best experience with our dedicated app. Fast, secure, and always up to date.';
+                const headerTitle = installSection?.querySelector('.install-header h3');
+                if (headerTitle) headerTitle.textContent = 'Install App';
+                const headerIcon = installSection?.querySelector('.install-header svg');
+                if (headerIcon) {
+                    headerIcon.innerHTML =
+                        '<path d="M12 2v8M8 6l4-4 4 4" /><path d="M21 12v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8" /><path d="M7 16h10" />';
+                }
+                const btnEl = installSection?.querySelector('.side-drawer__install-btn');
+                if (btnEl) {
+                    btnEl.innerHTML = '<span class="spinner"></span><span class="btn-text">📲 Install App</span>';
+                    btnEl.classList.remove('loading');
+                    btnEl.disabled = false;
+                }
+            }
+        }
+
+        // Listen for the beforeinstallprompt event
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            // Show the install button
+            const installSection = document.getElementById('installSection');
+            if (installSection) installSection.classList.remove('hidden');
+            // Update UI
+            const btn = document.getElementById('installAppBtn');
+            if (btn) {
+                btn.style.display = 'flex';
+                btn.disabled = false;
+                btn.innerHTML = '<span class="spinner"></span><span class="btn-text">📲 Install App</span>';
+                btn.classList.remove('loading');
+            }
+            // Hide badge
+            const badge = document.getElementById('installedBadge');
+            if (badge) badge.style.display = 'none';
+            // If already installed, hide button
+            if (checkIfInstalled()) {
+                updateInstallUI();
+            }
+        });
+
+        // Listen for app installed
+        window.addEventListener('appinstalled', () => {
+            isAppInstalled = true;
+            deferredPrompt = null;
+            updateInstallUI();
+            showToast('🎉 App installed successfully!');
+            // Close the side drawer
+            closeSideDrawer();
+        });
+
+        // Also check when display mode changes
+        window.matchMedia('(display-mode: standalone)').addEventListener('change', (evt) => {
+            if (evt.matches) {
+                isAppInstalled = true;
+                updateInstallUI();
+            }
+        });
+
+        function triggerInstall() {
+            const btn = document.getElementById('installAppBtn');
+            if (!deferredPrompt) {
+                // If no prompt available, show a helpful message
+                // Check if already installed
+                if (checkIfInstalled()) {
+                    updateInstallUI();
+                    return;
+                }
+                // On iOS, show instructions
+                if (navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad')) {
+                    showToast('📱 Tap the Share button then "Add to Home Screen"');
+                    return;
+                }
+                showToast('⚠️ Install prompt not available. Try opening in Chrome or Edge.');
+                return;
+            }
+
+            // Show loading state
+            btn.classList.add('loading');
+            btn.disabled = true;
+
+            deferredPrompt.prompt();
+
+            deferredPrompt.userChoice.then((choiceResult) => {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+                if (choiceResult.outcome === 'accepted') {
+                    showToast('🎉 Installing app...');
+                    // The 'appinstalled' event will handle the rest
+                } else {
+                    showToast('Installation cancelled.');
+                }
+                deferredPrompt = null;
+            });
+        }
+
+        // ============================================================
+        //  SIDE DRAWER CONTROLS
+        // ============================================================
+
+        function openSideDrawer() {
+            const overlay = document.getElementById('sideDrawerOverlay');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Update cart badge in side drawer
+            document.getElementById('sideCartBadge').textContent = itemsInCartTotalCount || '0';
+            // Check install state
+            checkIfInstalled();
+            updateInstallUI();
+        }
+
+        function closeSideDrawer() {
+            const overlay = document.getElementById('sideDrawerOverlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function toggleSideDrawer() {
+            const overlay = document.getElementById('sideDrawerOverlay');
+            if (overlay.classList.contains('active')) {
+                closeSideDrawer();
+            } else {
+                openSideDrawer();
+            }
+        }
+
+        function handleSideDrawerOutside(e) {
+            if (e.target.id === 'sideDrawerOverlay') {
+                closeSideDrawer();
+            }
+        }
+
         // ============================================================
         //  JSON BIN CONFIG
         // ============================================================
@@ -1932,25 +2460,6 @@
             const div = document.createElement('div');
             div.className = 'toast-msg';
             div.textContent = msg;
-            Object.assign(div.style, {
-                position: 'fixed',
-                bottom: '80px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                background: 'rgba(20,20,20,0.95)',
-                color: '#fff',
-                padding: '12px 24px',
-                borderRadius: '40px',
-                border: '1px solid rgba(255,255,255,0.1)',
-                backdropFilter: 'blur(12px)',
-                fontSize: '14px',
-                fontWeight: '600',
-                zIndex: '999',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
-                maxWidth: '90%',
-                textAlign: 'center',
-                transition: 'opacity 0.3s'
-            });
             document.body.appendChild(div);
             setTimeout(() => { div.style.opacity = '0';
                 setTimeout(() => div.remove(), 400); }, 3000);
@@ -1961,7 +2470,6 @@
         // ============================================================
         const CHAT_VENDOR_ID = 10;
 
-        // ---- User chat widget - PRIVATE ----
         async function loadChatMessages() {
             const container = document.getElementById('chatMessagesContainer');
             if (!currentUser) {
@@ -1972,25 +2480,17 @@
                 const data = await fetchBinData();
                 const allMessages = data.chat_messages || [];
                 const vendorMessages = allMessages.filter(m => m.vendorId === CHAT_VENDOR_ID);
-
-                // Get messages from this user
                 const userMessages = vendorMessages.filter(m => m.phone === currentUser.phone && m.sender === 'user');
                 const userMsgIds = new Set(userMessages.map(m => m.id));
-
-                // Get admin replies to this user's messages
                 const adminReplies = vendorMessages.filter(m =>
                     m.sender === 'admin' && m.replyTo && userMsgIds.has(m.replyTo)
                 );
-
-                // Combine and sort
                 const allUserMessages = [...userMessages, ...adminReplies];
                 allUserMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-
                 if (allUserMessages.length === 0) {
                     container.innerHTML = `<div class="chat-empty">No messages yet. Start a conversation!</div>`;
                     return;
                 }
-
                 container.innerHTML = allUserMessages.map(m => {
                     const isSelf = m.sender === 'user';
                     const isAdmin = m.sender === 'admin';
@@ -2116,19 +2616,13 @@
                 const data = await fetchBinData();
                 const messages = data.chat_messages || [];
                 const vendorMessages = messages.filter(m => m.vendorId === CHAT_VENDOR_ID);
-
-                // Get user's messages
                 const userMsgs = vendorMessages.filter(m => m.phone === phone && m.sender === 'user');
                 const userMsgIds = new Set(userMsgs.map(m => m.id));
-
-                // Get admin replies to this user
                 const adminReplies = vendorMessages.filter(m =>
                     m.sender === 'admin' && m.replyTo && userMsgIds.has(m.replyTo)
                 );
-
                 const allMsgs = [...userMsgs, ...adminReplies];
                 allMsgs.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-
                 if (allMsgs.length === 0) {
                     container.innerHTML = `<div class="admin-panel__empty">No messages with this user.</div>`;
                     userNameEl.textContent = 'User';
@@ -2269,7 +2763,6 @@
             window.location.hash = '';
         }
 
-        // Handle Enter key on password input
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('killPasswordInput').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') unlockKillPanel();
@@ -2311,29 +2804,23 @@
                 killedIds.add(idStr);
             }
             await saveKilledState();
-            // Re-render both catalog and kill panel
             renderCatalog();
             renderKillPanel();
-            // Also update admin panel if open
             if (document.getElementById('adminPanel').classList.contains('active')) {
                 loadAdminUsers();
                 if (selectedAdminUser) loadAdminConversation(selectedAdminUser);
             }
         }
 
-        // ---- Render Kill Panel ----
         function renderKillPanel() {
             const container = document.getElementById('killPanelGrid');
             if (!container) return;
-
-            // Use the same PRODUCT_DATASET (defined later)
             const allProducts = PRODUCT_DATASET || [];
-
             if (allProducts.length === 0) {
-                container.innerHTML = `<div style="padding:40px;text-align:center;color:var(--color-text-muted);">No products found.</div>`;
+                container.innerHTML =
+                    `<div style="padding:40px;text-align:center;color:var(--color-text-muted);">No products found.</div>`;
                 return;
             }
-
             container.innerHTML = allProducts.map(p => {
                 const killed = isProductKilled(p.id);
                 const statusClass = killed ? 'dead' : 'alive';
@@ -2520,6 +3007,7 @@
             else cart.push({ product, quantity: activeQuantitySelection });
             itemsInCartTotalCount += activeQuantitySelection;
             document.getElementById("global-cart-counter").innerText = itemsInCartTotalCount;
+            document.getElementById("sideCartBadge").textContent = itemsInCartTotalCount;
             document.getElementById("drawer-action-placement-zone").innerHTML = `
             <div class="action-row">
               <button class="action-btn action-btn--secondary" onclick="toggleCartDrawer(false)">Continue Shopping</button>
@@ -2689,30 +3177,23 @@
         function renderCatalog() {
             const container = document.getElementById("products-catalog-wrapper");
             if (!container) return;
-
-            // Filter out killed products
             const visibleProducts = PRODUCT_DATASET.filter(p => !isProductKilled(p.id));
-
             if (visibleProducts.length === 0) {
                 container.innerHTML =
-                `<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--color-text-muted);">No products available right now.</div>`;
+                    `<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--color-text-muted);">No products available right now.</div>`;
                 return;
             }
-
             container.innerHTML = visibleProducts.map(product => {
                 const isExternal = product.external === true;
                 const isLastChina = product.id === 10;
-
                 const priceHtml = isExternal ?
                     `<div class="ai-product-card__price">${product.price}</div>` :
                     `<div class="ai-product-card__price">$${product.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>`;
-
                 const buttonClass = isExternal ? "ai-product-card__button ai-product-card__button--external" :
                     "ai-product-card__button";
                 const buttonAction = isExternal ? `redirectToExternal('${product.externalLink}')` :
                     `openProductDrawer(${product.id})`;
                 const buttonText = isExternal ? "Visit Website →" : "View product";
-
                 let chatButtonHtml = '';
                 if (isLastChina) {
                     chatButtonHtml = `
@@ -2724,14 +3205,12 @@
                 </button>
               `;
                 }
-
                 const actionsHtml = `
               <div class="ai-product-card__actions">
                 <button class="${buttonClass}" onclick="${buttonAction}">${buttonText}</button>
                 ${chatButtonHtml}
               </div>
             `;
-
                 return `<div class="ai-product-card">
               <div class="ai-product-card__image-wrapper">
                 <img src="${product.image}" class="ai-product-card__image" loading="lazy" alt="${product.title}" />
@@ -2765,7 +3244,6 @@
                     loadChatMessages();
                 }
                 if (isKillOpen && killPanelUnlocked) {
-                    // Re-render kill panel to reflect any changes from other sessions
                     renderKillPanel();
                 }
             }, 5000);
@@ -2781,7 +3259,6 @@
             } else if (hash === '#kill') {
                 openKillPanel();
             } else {
-                // Close any open panels
                 if (document.getElementById('adminPanel').classList.contains('active')) {
                     closeAdminPanel();
                 }
@@ -2791,8 +3268,72 @@
                 if (document.getElementById('home-view').style.display === 'none') {
                     document.getElementById('home-view').style.display = 'block';
                 }
-                // Also close kill password overlay
                 closeKillPassword();
+            }
+        }
+
+        // ============================================================
+        //  PWA MANIFEST (injected as data URI)
+        // ============================================================
+        function injectManifest() {
+            const manifest = {
+                name: "The Supply Center",
+                short_name: "Supply Center",
+                description: "Premium Sourcing Network",
+                start_url: window.location.href.split('?')[0],
+                display: "standalone",
+                background_color: "#000000",
+                theme_color: "#000000",
+                icons: [{
+                    src: "https://raw.githubusercontent.com/KodexGenStudio/THESUPPLYCENTER/refs/heads/main/Logo.png",
+                    sizes: "512x512",
+                    type: "image/png",
+                    purpose: "any maskable"
+                }, {
+                    src: "https://raw.githubusercontent.com/KodexGenStudio/THESUPPLYCENTER/refs/heads/main/Logo.png",
+                    sizes: "192x192",
+                    type: "image/png",
+                    purpose: "any maskable"
+                }]
+            };
+            const json = JSON.stringify(manifest);
+            const encoded = encodeURIComponent(json);
+            const dataUri = `data:application/json;charset=utf-8,${encoded}`;
+            const link = document.getElementById('pwa-manifest');
+            link.href = dataUri;
+        }
+
+        // ============================================================
+        //  SERVICE WORKER (registered from blob URL)
+        // ============================================================
+        function registerServiceWorker() {
+            // Minimal service worker that caches nothing but enables PWA install
+            const swCode = `
+            self.addEventListener('install', e => {
+              e.waitUntil(self.skipWaiting());
+            });
+            self.addEventListener('activate', e => {
+              e.waitUntil(self.clients.claim());
+            });
+            self.addEventListener('fetch', e => {
+              e.respondWith(fetch(e.request));
+            });
+          `;
+            try {
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                navigator.serviceWorker.register(swUrl, { scope: '/' })
+                    .then(() => {
+                        console.log('[PWA] Service Worker registered');
+                    })
+                    .catch((err) => {
+                        console.warn('[PWA] SW registration failed:', err);
+                        // Try with a different approach - use the same-origin URL
+                        // Some browsers require the SW to be from the same origin with proper MIME
+                        // We'll use the blob URL approach which works in Chrome
+                    });
+            } catch (e) {
+                console.warn('[PWA] SW registration error:', e);
             }
         }
 
@@ -2800,7 +3341,15 @@
         //  INIT
         // ============================================================
         document.addEventListener("DOMContentLoaded", async () => {
-            // Load killed state first
+            // Inject PWA manifest
+            injectManifest();
+
+            // Register service worker
+            if ('serviceWorker' in navigator) {
+                registerServiceWorker();
+            }
+
+            // Load killed state
             await loadKilledState();
 
             const stored = getStoredUser();
@@ -2810,6 +3359,9 @@
             updateAuthUI();
             renderCatalog();
             renderReviews();
+
+            // Check if app is already installed
+            checkIfInstalled();
 
             const likeBtn = document.getElementById('likeButton');
             const likeSpan = document.getElementById('likeCounter');
@@ -2830,8 +3382,21 @@
             }
 
             document.getElementById("global-cart-counter").innerText = "0";
+            document.getElementById("sideCartBadge").textContent = "0";
 
-            // Handle hash on load
+            // Hamburger menu toggle
+            document.getElementById("menuToggleBtn").addEventListener("click", (e) => {
+                e.stopPropagation();
+                toggleSideDrawer();
+            });
+
+            // Close side drawer on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeSideDrawer();
+                }
+            });
+
             handleHashChange();
 
             document.getElementById('chatInput').addEventListener('keydown', (e) => {
@@ -2842,10 +3407,8 @@
                 if (e.key === 'Enter') sendAdminReply();
             });
 
-            // Hash change listener
             window.addEventListener('hashchange', handleHashChange);
 
-            // Start polling
             startPolling();
 
             document.addEventListener('visibilitychange', () => {
@@ -2860,9 +3423,12 @@
                     if (document.getElementById('killPanel').classList.contains('active') && killPanelUnlocked) {
                         renderKillPanel();
                     }
+                    // Check install state again
+                    checkIfInstalled();
                 }
             });
         });
     </script>
+
 </body>
-                                                                         </html>
+    </html>
